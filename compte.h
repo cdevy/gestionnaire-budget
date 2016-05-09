@@ -20,6 +20,8 @@ struct Compte {
 
 Compte nouveau_compte(char nom[20], long numero, char proprietaire[30], char banque[20], char agance[20], double solde);
 
+void suppression(Compte compte);
+
 void affiche_solde(Compte compte);
 
 void affiche_operations(Compte compte); // à voir plus tard
