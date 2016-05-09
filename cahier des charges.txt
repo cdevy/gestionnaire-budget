@@ -1,0 +1,73 @@
+Cahier des charges :
+
+fichier compte --> permet de créer un compte ( date de mise à jour, solde)
+	       --> permet d'afficher les informations liées à un compte
+               --> Facultatif (gerer les informations sur un intervalle de temps)
+C
+
+
+fichier opération --> permet de créer/afficher une opération
+J
+
+fichier releve --> permet de charger des informations a partir d'un relevé
+J
+
+fichier catégorie --> permet de gérer les infos (ajouter catégories, assigner une catégorie aux entrées : date et informations) --> switch 
+		  --> seuils de dépenses 
+C
+
+fichier statistiques --> permet de faire des graphiques à partir des infos (dépenses mensuelles...) 
+generer un menu (graphique par catégories, balance, dépense, entrée)
+C - J
+
+Génerer des tests 
+C - J
+
+fichier catégories :
+
+Vie quotidienne
+	Alimentation
+	Habillement
+	Retrait
+	Ma Banque
+	Divers
+Loisirs
+	Culture
+	Presse
+	Restaurants & Sorties
+	Week-ends & Vacances
+	Cadeaux
+	Divers
+Santé
+	Médecins
+	Pharmacie
+	Sécurité Sociale & Mutuelle
+	Divers
+Habitation
+	Loyer
+	Gaz & Electricité
+	Eau
+	Téléphonie & Internet
+	Assurances
+	Divers
+Transports
+	Abonnements
+	Billets
+	Parking
+	Carburant
+	Entretien
+	Assurances
+	Divers
+Impôts & Solidarité
+	Impôts sur le revenu
+	Taxes foncières
+	Taxe d'habitation
+	Dons
+	Divers
+Professionnel
+	Matériel
+	Repas
+	Voyages
+	Divers
+Epargne
+
