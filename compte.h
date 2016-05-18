@@ -3,32 +3,29 @@
 
 /*
 Définit un compte
-Permet de charger des opérations à partir d'un relevé
-Permet de créer un relevé
+Permet de sauvegarder les opérations liées à un compte
 */
 
-typedef struct Compte Compte;
-
-struct Compte {
-    char nom[20];
+typedef struct {
+    char* nom;
     long numero;
-    char proprietaire[30];
-    char banque[20];
-    char agence[20];
+    char* proprietaire;
+    char* banque;
+    char* agence;
     double solde;
-};
+} Compte;
 
-Compte nouveau_compte(char nom[20], long numero, char proprietaire[30], char banque[20], char agance[20], double solde);
+Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque, char* agence, double solde);
 
-void suppression(Compte compte);
+void suppression(Compte* compte);
 
-void affiche_solde(Compte compte);
+void affiche_solde(Compte* compte);
 
-void affiche_operations(Compte compte); // à voir plus tard
+void affiche_operations(Compte* compte); // à voir plus tard
 
-void informations(Compte compte);
+void informations(Compte* compte);
 
-void sauvegarder(Compte compte);
+void sauvegarde(Compte* compte);
 
 
 #endif // COMPTE_H_INCLUDED
