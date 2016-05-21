@@ -1,6 +1,11 @@
 #ifndef OPERATION_H_INCLUDED
 #define OPERATION_H_INCLUDED
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "categorie.h"
+
 /*
 Définit une opération
 */
@@ -8,17 +13,15 @@ Définit une opération
 typedef struct Operation Operation;
 
 struct Operation {
-    Date date;
+    char date[9];
     char titre[32];
     double debit;
     double credit;
     Categorie categorie;
-    SousCategorie sousCategorie;
+    Operation *next; //pointe vers la prochaine opération 
 };
 
-void ajout(Operation op, Categorie c);
+Operation* nouvelle_operation(char D[9], char t[32], double d, double c, Categorie cat, Operation *suivant);
 
-void enleve(Operation op, Categorie c);
-
-
+void retirer_operation(Operation *op,Operation *list);
 #endif // OPERATION_H_INCLUDED
