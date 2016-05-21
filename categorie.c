@@ -1,58 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include "utils.h"
 #include "categorie.h"
 
-Categorie Quotidien = {"Vie Quotidienne"};
-SousCategorie Alimentation = {"Alimentation", Quotidien};
-SousCategorie Habillement = {"Habillement", Quotidien};
-SousCategorie Retrait = {"Retrait", Quotidien};
-SousCategorie MaBanque = {"Ma Banque", Quotidien};
-SousCategorie Divers = {"Divers", Quotidien};
+Categorie** initialiser_categories(int taille) {
+    Categorie** categories = (Categorie*) malloc(sizeof(Categorie)*taille); 
+    int nbCategories = 0;
+    return categories;  
+}
 
-Categorie Loisirs = {"Loisirs"};
-SousCategorie Culture = {"Culture", Loisirs};
-SousCategorie Presse = {"Presse", Loisirs};
-SousCategorie RS = {"Restaurants & Sorties", Loisirs};
-SousCategorie WV = {"Week-ends & Vacances", Loisirs};
-SousCategorie Cadeaux = {"Cadeaux", Loisirs};
-SousCategorie Divers = {"Divers", Loisirs};
+Categorie* ajout_categorie(char* nom, int taille) {
+    Categorie* c = (Categorie*) malloc(sizeof(Categorie));
+    if (c != NULL) {
+        c->nom = (char *) malloc((strlen(nom) + 1)*sizeof(char));
+        strcpy(c->nom, nom);
+        SousCategorie* sousCategories = (SousCategorie*) malloc(sizeof(SousCategorie)*taille);
+        c->nbSsCategories = 0;
+	nbCategories ++;
+    } else {
+	free(c);
+    }
+    return c;
+}
 
-Categorie Sante = {"Santé"};
-SousCategorie Medecins = {"Médecins", Sante};
-SousCategorie Pharmacie = {"Pharmacie", Sante};
-SousCategorie Secu = {"Sécurité Sociale & Mutuelle", Sante};
-SousCategorie Divers = {"Divers", Sante};
+SousCategorie* ajout_sousCategorie(Categorie* c, char* nom) {
+    SousCategorie* ssc = (SousCategorie*) malloc(sizeof(SousCategorie));
+    if (ssc != NULL) {
+        ssc->nom = (char *) malloc((strlen(nom) + 1)*sizeof(char));
+        strcpy(ssc->nom, nom);
+	c->sousCategories[c->nbSsCategories] = ssc;
+        c->nbSsCategories ++;
+    } else {
+	free(ssc);
+    }
+    return ssc;
+}
 
-Categorie Habitation = {"Habitation"};
-SousCategorie Loyer = {"Loyer", Habitation};
-SousCategorie GE = {"Gaz & Electricité", Habitation};
-SousCategorie Eau = {"Eau", Habitation};
-SousCategorie TI = {"Téléphonie & Internet", Habitation};
-SousCategorie Assurances = {"Assurances", Habitation};
-SousCategorie Divers = {"Divers", Habitation};
+void affiche_categories() {
+    /* affiche menu */
+}
 
-Categorie Transports = {"Transports"};
-SousCategorie Abonnements = {"Abonnements", Transports};
-SousCategorie Billets = {"Billets", Transports};
-SousCategorie Parking = {"Parking", Transports};
-SousCategorie Carburant = {"Carburant", Transports};
-SousCategorie Entretien = {"Entretien", Transports};
-SousCategorie Assurances = {"Assurances", Transports};
-SousCategorie Divers = {"Divers", Transports};
+void budget_max(Categorie c) {
+}
 
-Categorie IS = {"Impôts & Solidarité"};
-SousCategorie IR = {"Impôts sur le revenu", IS};
-SousCategorie TF = {"Taxes Foncières", IS};
-SousCategorie TH = {"Taxe d'habitation", IS};
-SousCategorie Dons = {"Dons", IS};
-SousCategorie Divers = {"Divers", IS};
+int main() {
+    Categorie* categories = initialiser_categories(10);
+    if (categories != NULL) {
+	categories[nbCategories] = ajout_categorie("Vie quotidienne", 5);
+	ajout_ss_categorie(categories[0], "Alimentation");
+	ajout_ss_categorie(categories[0], "Habillement");
+	printf("La liste contient %d categorie(s).\n", nbCategories);
+	printf("La premiere categorie est : %s et contient %d sous-categories.\n", categories[0]->nom, categories[0]->nbSsCategories);
+	printf("Les sous-categories de c1 sont : %s et %s.\n", (categories[0]->sousCategories[0])->nom, (categories[0]->sousCategories[1])->nom;
+	/*categories[1] = ajout_categorie(liste, "Loisirs", 5);*/
+    }
+    return 0;
+}
 
-Categorie Professionnel = {"Professionel"};
-SousCategorie Materiel = {"Matériel", Professionnel};
-SousCategorie Repas = {"Repas", Professionnel};
-SousCategorie Voyages = {"Voyages", Professionnel};
-SousCategorie Divers = {"Divers", Professionnel};
-
-Categorie Epargne = {"Epargne"};
-
-Categorie Divers = {"Divers"};

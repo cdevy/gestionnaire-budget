@@ -2,25 +2,37 @@
 #define CATEGORIE_H_INCLUDED
 
 /*
-Définit les catégories et sous-catégories
+Definit les categories et sous-categories
+Permet de classer les operations et de fixer un budget par categorie
 */
 
-typedef struct Categorie Categorie;
-typedef struct SousCategorie SousCategorie;
+typedef struct Categories {
+    Categorie* categories;
+    int nbCategories; /* nb de categories creees */
+} Categories;
 
-struct Categorie {
-    char nom[32];
-};
+typedef struct Categorie {
+    char* nom;
+    double budgetMax;
+    SousCategorie* sousCategories;
+    int nbSsCategories; /* nb de sous-categories creees */
+} Categorie;
 
-struct SousCategorie {
-    char nom[32];
-    Categorie categorie;
-};
+typedef struct SousCategorie {
+    char* nom;
+    double budgetMax;
+} SousCategorie;
 
-void budget_max(Categorie c);
+Categorie* ajout_categorie(char*, int taille);
 
-void affiche_operations(Categorie c);
+SousCategorie* ajout_sousCategorie(Categorie* c, char* nom);
+
+void affiche_categories();
+
+double budget_max(Categorie c);
+
+void setBudget_max(Categorie c, double max);
 
 void affiche_operations(SousCategorie ssc);
 
-#endif // CATEGORIE_H_INCLUDED
+#endif
