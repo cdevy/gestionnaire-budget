@@ -10,7 +10,7 @@
 Définit une opération
 */
 
-typedef struct Operation Operation;
+typedef enum Type_operation {debit, credit} Type_operation;
 
 struct Operation {
     char date[9];
@@ -20,6 +20,7 @@ struct Operation {
     Categorie categorie;
     Operation *next; //pointe vers la prochaine opération 
 };
+
 
 Operation* nouvelle_operation(char D[9], char t[32], double d, double c, Categorie cat, Operation *suivant);
 
