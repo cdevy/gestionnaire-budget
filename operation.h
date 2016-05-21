@@ -5,16 +5,16 @@
 Définit une opération
 */
 
-typedef struct Operation Operation;
+typedef enum Type_operation {debit, credit} Type_operation;
 
-struct Operation {
+typedef struct Operation {
     Date date;
     char titre[32];
-    double debit;
-    double credit;
+    Type_operation type;
+    double valeur;
     Categorie categorie;
     SousCategorie sousCategorie;
-};
+} Operation;
 
 void ajout(Operation op, Categorie c);
 
