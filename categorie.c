@@ -1,60 +1,123 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utils.h"
 #include "categorie.h"
 
-Categorie** initialiser_categories(int taille) {
-    Categorie** categories = (Categorie*) malloc(sizeof(Categorie)*taille); 
-    int nbCategories = 0;
-    return categories;  
-}
 
-Categorie* ajout_categorie(char* nom, int taille) {
-    Categorie* c = (Categorie*) malloc(sizeof(Categorie));
-    if (c != NULL) {
-        c->nom = (char *) malloc((strlen(nom) + 1)*sizeof(char));
-        strcpy(c->nom, nom);
-        SousCategorie* sousCategories = (SousCategorie*) malloc(sizeof(SousCategorie)*taille);
-        c->nbSsCategories = 0;
-	nbCategories ++;
-    } else {
-	free(c);
+void affiche_categories(int affichage) {
+    if (affichage) {
+	printf("Les categories sont :\n");
     }
-    return c;
+    printf("1.Vie Quotidienne\n2.Loisirs\n3.Sante\n4.Habitation\n5.Transports\n6.Impots & Solidarite\n7.Professionel\n8.Epargne\n9.Divers\n");
 }
 
-SousCategorie* ajout_sousCategorie(Categorie* c, char* nom) {
-    SousCategorie* ssc = (SousCategorie*) malloc(sizeof(SousCategorie));
-    if (ssc != NULL) {
-        ssc->nom = (char *) malloc((strlen(nom) + 1)*sizeof(char));
-        strcpy(ssc->nom, nom);
-	c->sousCategories[c->nbSsCategories] = ssc;
-        c->nbSsCategories ++;
-    } else {
-	free(ssc);
+void affiche_sousCategories(Categorie cat, int affichage) {
+    switch (cat) {
+	case QUOTIDIEN:
+	    if (affichage) {
+		printf("Les sous-categories de Vie Quotidienne sont :\n");
+	    }
+	    printf("1.Alimentation\n2.Habillement\n3.Ma Banque\n4.Divers\n");
+	    break;
+	case LOISIRS:
+	    if (affichage) {
+		printf("Les sous-categories de Loisirs sont :\n");
+	    }
+	    printf("1.Culture\n2.Presse\n3.Restaurants & Sorties\n4.Week-ends & Vacances\n5.Cadeaux\n6.Divers\n");    	    
+	    break;
+	case SANTE:
+	    if (affichage) {
+		printf("Les sous-categories de Sante sont :\n");
+	    }
+	    printf("1.Medecins\n2.Pharmacie\n3.Securite sociale & Mutuelles\n4.Divers\n");    	    
+	    break;
+	case HABITATION:
+	    if (affichage) {
+		printf("Les sous-categories de Habitation sont :\n");
+	    }
+	    printf("1.Loyer\n2.Gaz & Electricite\n3.Eau\n4.Telephonie & Internet\n5.Assurances\n6.Divers\n");     	    
+	    break;
+	case TRANSPORTS:
+	    if (affichage) {
+		printf("Les sous-categories de Habitation sont :\n");
+	    }
+	    printf("1.Abonnements\n2.Billets\n3.Parking\n4.Carburant\n5.Entretien\n6.Assurances\n7.Divers\n");    	    
+	    break;
+	case IMPOTS_SOLIDARITE:
+	    if (affichage) {
+		printf("Les sous-categories de Impots & Solidarite sont :\n");
+	    }
+	    printf("1.Impot sur le revenu\n2.Taxes foncieres\n3.Taxe d'habitation\n4.Dons\n5.Divers\n");    	    
+	    break;
+	case PROFESSIONNEL:
+	    if (affichage) {
+		printf("Les sous-categories de Professionnel sont :\n");
+	    }
+	    printf("1.Materiel\n2.Repas\n3.Voyages\n4.Divers\n");   
+	    break;
+	case EPARGNE:
+    	    printf("La categorie Epargne n'a pas de sous-categories\n");    	    
+	    break;
+	case DIVERS:
+    	    printf("La categorie Divers n'a pas de sous-categories\n");    	    
+	    break;
+	default:
+    	    printf("La categorie n'existe pas\n");
+    	    break;
     }
-    return ssc;
 }
 
-void affiche_categories() {
-    /* affiche menu */
-}
-
-void budget_max(Categorie c) {
-}
-
-int main() {
-    Categorie* categories = initialiser_categories(10);
-    if (categories != NULL) {
-	categories[nbCategories] = ajout_categorie("Vie quotidienne", 5);
-	ajout_ss_categorie(categories[0], "Alimentation");
-	ajout_ss_categorie(categories[0], "Habillement");
-	printf("La liste contient %d categorie(s).\n", nbCategories);
-	printf("La premiere categorie est : %s et contient %d sous-categories.\n", categories[0]->nom, categories[0]->nbSsCategories);
-	printf("Les sous-categories de c1 sont : %s et %s.\n", (categories[0]->sousCategories[0])->nom, (categories[0]->sousCategories[1])->nom;
-	/*categories[1] = ajout_categorie(liste, "Loisirs", 5);*/
+void gestion_categories() {
+    int choix;
+    printf("Choisissez parmi les categories suivantes :\n");
+    affiche_categories(0);
+    scanf("%d", &choix);
+    printf("\n");
+    switch (choix) {
+	case 1:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+    	    affiche_sousCategories(QUOTIDIEN, 0);
+	    scanf("%d", &choix);
+	    break;
+	case 2:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+	    affiche_sousCategories(LOISIRS, 0);   
+	    scanf("%d", &choix);	    
+	    break;
+	case 3:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+	    affiche_sousCategories(SANTE, 0);  
+	    scanf("%d", &choix);  	    
+	    break;
+	case 4:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+	    affiche_sousCategories(HABITATION, 0); 
+	    scanf("%d", &choix);   	    
+	    break;
+	case 5:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+	    affiche_sousCategories(TRANSPORTS, 0); 
+	    scanf("%d", &choix);   	    
+	    break;
+	case 6:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+	    affiche_sousCategories(IMPOTS_SOLIDARITE, 0);   
+	    scanf("%d", &choix); 	    
+	    break;
+	case 7:
+	    printf("Choisissez parmi les sous-categories suivantes :\n");
+ 	    affiche_sousCategories(PROFESSIONNEL, 0);   
+	    scanf("%d", &choix);	    
+	    break;
+	case 8:
+	    affiche_sousCategories(EPARGNE, 0);   	    
+	    break;
+	case 9:
+	    affiche_sousCategories(DIVERS, 0);    	    
+	    break;
+	default:
+    	    printf("La categorie choisie n'existe pas\n");
+    	    break;
     }
-    return 0;
 }
 

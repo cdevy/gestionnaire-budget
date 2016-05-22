@@ -2,42 +2,51 @@
 #define COMPTE_H_INCLUDED
 
 /*
-Définit un compte
-Permet de sauvegarder les opérations liées à un compte
+Definit un compte
+Permet de sauvegarder les operations liees a un compte
 */
 
-typedef struct {
+typedef struct Compte Compte;
+
+struct Compte {
     char* nom;
-    long numero; // 10 chiffres !
+    long numero; /* 10 chiffres */
     char* proprietaire;
     char* banque;
     char* agence;
     double solde;
     char* nomFichier;
-} Compte;
+    Compte* next;
+};
+
+typedef Compte* Comptes;
+
+Comptes initialiser();
 
 Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque, char* agence, double solde);
 
-void suppression(Compte* compte);
+Comptes ajouter(Comptes liste, Compte* c);
+
+Comptes suppression(Comptes liste, Compte* compte);
+
+void free_compte(Compte* c);
 
 void affiche_solde(Compte* compte);
 
-void affiche_operations(Compte* compte); // à voir plus tard
+void affiche_operations(Compte* compte); /* à voir plus tard */
 
 void informations(Compte* compte);
 
 void sauvegarde(Compte* compte);
 
-char* nom_fichier(Compte* compte);
+int depot(Compte* c, double valeur);
 
-long taille_double(double d);
+int retrait(Compte* c, double valeur);
 
-long taille_long(long l); 
+int virement(Compte* debiteur, Compte* crediteur, double valeur);
 
-void depot(Compte* c, double valeur);
+Compte* compte(Comptes liste, long numero);
 
-void retrait(Compte* c, double valeur);
+int nb_comptes(Comptes liste);
 
-void transaction(Compte* debiteur, Compte* crediteur, double valeur);
-
-#endif // COMPTE_H_INCLUDED
+#endif
