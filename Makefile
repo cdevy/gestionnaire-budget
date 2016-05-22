@@ -1,23 +1,34 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -g
 LDFLAGS=-lm
-EXEC=compte
+EXEC=projet
 
-all: $(EXEC)
+all:: $(EXEC)
 
-compte: compte.o main.o
-	$(CC) -o compte compte.o main.o $(LDFLAGS)
+projet: compte.o utils.o main.o application.o categorie.o
+	$(CC) -o projet compte.o utils.o main.o application.o categorie.o $(LDFLAGS)
 
-compte.o: compte.c
-	$(CC) -o compte.o -c compte.c $(CFLAGS)
+application.o: application.c application.h utils.h compte.h categorie.h
+	$(CC) $(CFLAGS) -o application.o -c -include utils.h -include compte.h -include categorie.h application.c
 
-main.o: main.c compte.h
-	$(CC) -o main.o -c main.c $(CFLAGS)
+categorie.o: categorie.c categorie.h
+	$(CC) $(CFLAGS) -o categorie.o -c categorie.c
 
-clean:
+compte.o: compte.c compte.h utils.h
+	$(CC) $(CFLAGS) -o compte.o -c -include utils.h compte.c
+
+utils.o: utils.c utils.h
+	$(CC) $(CFLAGS) -o utils.o -c utils.c
+
+main.o: main.c compte.h utils.h
+	$(CC) $(CFLAGS) -o main.o -c main.c $(CFLAGS)
+
+.PHONY: clean mrproper
+
+clean::
 	rm -rf *.o
 
-mrproper: clean
+mrproper:: clean
 	rm -rf $(EXEC)
 
 				
