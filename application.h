@@ -7,10 +7,12 @@ Gestion de l'interface utilisateur
 
 int menu();
 
-void gestion_menu(int action);
+void gestion_menu(Comptes liste, int action);
 
-void gestion_comptes(int choix);
+void gestion_comptes(Comptes liste, int choix);
 
-void gestion_transactions(int choix);
+void gestion_informations(Comptes liste, int choix);
+
+void gestion_transactions(Comptes liste, int choix);
 
 #endif
