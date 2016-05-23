@@ -9,18 +9,19 @@
 /*
 Définit une opération
 */
+//voir pour faire l'enumeration debit credit !
 
-typedef enum Type_operation {debit, credit} Type_operation;
 
-typedef struct Operation {
+typedef struct Operation Operation;
+
+struct Operation {
     char date[9];
     char titre[32];
     double debit;
     double credit;
     Categorie categorie;
     Operation *next; //pointe vers la prochaine opération 
-}Operation;
-
+};
 
 Operation* nouvelle_operation(char D[9], char t[32], double d, double c, Categorie cat, Operation *suivant);
 
