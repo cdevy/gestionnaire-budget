@@ -2,18 +2,20 @@
 #include <stdio.h>
 
 
+
 //Une fois qu'on a terminé de travailler sur le fichier, on ferme le fichier.
 
 
 int main(int argc, char **argv)
 {
-	const char* nomDuFichier;
-	scanf("veuillez entrer le chemin de votre relever de compte %d", nomDuFichier); 
+	char* nomDuFichier;
+	//printf("veuillez entrer le chemin de votre relever de compte \n");
+	//scanf("%s", &nomDuFichier); 
 	
-	
+	char* contenu;
 	//On appelle la fonction d'ouverture de fichier fopen qui nous renvoie un pointeur sur le fichier.	
     FILE* fichier = NULL;
-    fichier = fopen(nomDuFichier, "r");
+    fichier = fopen("jc", "r");
 	
 	
 	//On vérifie si le fichier existe en testant la valeur du pointeur qu'on a reçu. 
@@ -22,8 +24,10 @@ int main(int argc, char **argv)
     if (fichier != NULL)
     {
         
-  
-        
+		fscanf(fichier, "%s", contenu);
+		printf("Qu'est ce qu'on veut ?? %s \n", contenu);
+		fscanf(fichier, "%s", contenu);
+		printf("Qu'est ce qu'on veut pas ?? %s \n", contenu);
         fclose(fichier);
     }
     
@@ -31,33 +35,8 @@ int main(int argc, char **argv)
     else
     {
         // Message d'erreur
-        printf("Impossible d'ouvrir le fichier %d", nomDuFichier);
+        printf("Impossible d'ouvrir le fichier %s", nomDuFichier);
     }
 
     return 0;
 }
-
-
-FILE *fichier;
-        char tampon[BUFSIZ];
-        int actuel = 0;
-        int c;
- 
- 
-        fichier = fopen ("test.txt", "r");
-        if (!fichier) {
-                return EXIT_FAILURE;
-        }
- 
-        while ((c = fgetc (fichier)) != EOF) {
-                if (c == ';' || c == '\n') {
-                        printf ("%ld\n", strtol (tampon, NULL, 10));
-                        actuel = 0;
-                        memset (tampon, 0, sizeof tampon);
-                } else {
-                        tampon[actuel++] = c;
-                }
-        }
- 
-	
-
