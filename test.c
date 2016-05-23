@@ -14,8 +14,8 @@ int main(int argc, char **argv)
 	double d = 0.122;
 	double c = 50;
 	Operation *u,*v,*w,*z;
-	u = nouvelle_operation(D2, t2, d, c, Quotidien,NULL);
-	v = nouvelle_operation(D, t, d, c, Quotidien,u);
+	u = nouvelle_operation(D2, t2, d, c, QUOTIDIEN,NULL);
+	v = nouvelle_operation(D, t, d, c, QUOTIDIEN,u);
 	printf("Affichage des deux opréations de la linked liste :\n");
 	
 	printf("Affichage de op1 :\n");
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 	printf("%p \n\n",v->next);	
 	
 	printf("Affichage des opréations de la linked liste après avoir retiré op1 :\n");
-	w = nouvelle_operation(D2, t2, d, c, Quotidien,NULL);
-	z = nouvelle_operation(D, t, d, c, Quotidien,w);
+	w = nouvelle_operation(D2, t2, d, c, QUOTIDIEN,NULL);
+	z = nouvelle_operation(D, t, d, c, QUOTIDIEN,w);
 	retirer_operation(z,z);
 	printf("%s \n",z->date);
 	printf("%s \n",z->titre);
