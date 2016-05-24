@@ -18,3 +18,10 @@ void vider_buffer() {
     int c;
     while ((c = getchar ()) != '\n' && c != EOF);
 }
+
+void traiter(char* chaine) {
+    char* p = strchr(chaine, '\n');
+    if (p) {
+	*p = 0;
+    }
+}
