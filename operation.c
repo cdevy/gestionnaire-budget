@@ -1,12 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "categorie.h"
 #include "operation.h"
 
-Operation* nouvelle_operation(char D[9], char t[32], double d, double c, Categorie cat, Operation *suivant) {
+Operation* nouvelle_operation(char D[9], char t[32], Type_operation type, double valeur, Operation *suivant) {
     Operation *o = (Operation*) malloc(sizeof(Operation));
     strcpy(o -> date, D);
     strcpy(o -> titre, t);
-    o -> debit = d;
-    o -> credit = c;
-    o -> categorie = cat;
+    o -> type = type;
+    o -> valeur = valeur;
+    o -> categorie = AUCUN;
+    o -> sousCategorie = AUCUN2;
     o -> next = suivant;
     return o;
 }

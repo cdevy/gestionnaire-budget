@@ -1,21 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "operation.h"
 #include "categorie.h"
-#include "operation.c"
-#include "categorie.c"
 
 
-int main(int argc, char **argv)
+int main()
 {
 	char D[9] = "12/12/12";
 	char D2[9] = "10/10/10";
 	char t[32] = "virement op1";
 	char t2[32] = "virement op2";
-	double d = 0.122;
-	double c = 50;
 	Operation *u,*v,*w,*z;
-	u = nouvelle_operation(D2, t2, d, c, QUOTIDIEN,NULL);
-	v = nouvelle_operation(D, t, d, c, QUOTIDIEN,u);
+	u = nouvelle_operation(D2, t2, DEBIT, -50, NULL);
+	v = nouvelle_operation(D, t, DEBIT, -10, u);
 	printf("Affichage des deux opréations de la linked liste :\n");
 	
 	printf("Affichage de op1 :\n");
@@ -34,8 +32,8 @@ int main(int argc, char **argv)
 	printf("%p \n\n",v->next);	
 	
 	printf("Affichage des opréations de la linked liste après avoir retiré op1 :\n");
-	w = nouvelle_operation(D2, t2, d, c, QUOTIDIEN,NULL);
-	z = nouvelle_operation(D, t, d, c, QUOTIDIEN,w);
+	w = nouvelle_operation(D2, t2, CREDIT, 200, NULL);
+	z = nouvelle_operation(D, t, CREDIT, 50, w);
 	retirer_operation(z,z);
 	printf("%s \n",z->date);
 	printf("%s \n",z->titre);

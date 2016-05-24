@@ -1,29 +1,26 @@
 #ifndef OPERATION_H_INCLUDED
 #define OPERATION_H_INCLUDED
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "categorie.h"
 
 /*
-Définit une opération
+DÃ©finit une opÃ©ration
 */
-//voir pour faire l'enumeration debit credit !
 
-
+typedef enum Type_operation {DEBIT, CREDIT} Type_operation;
 typedef struct Operation Operation;
 
 struct Operation {
     char date[9];
     char titre[32];
-    double debit;
-    double credit;
+    Type_operation type;
+    double valeur;
     Categorie categorie;
-    Operation *next; //pointe vers la prochaine opération 
+    SousCategorie sousCategorie;
+    Operation *next; //pointe vers la prochaine opÃ©ration 
 };
 
-Operation* nouvelle_operation(char D[9], char t[32], double d, double c, Categorie cat, Operation *suivant);
+Operation* nouvelle_operation(char D[9], char t[32], Type_operation type, double valeur, Operation *suivant);
 
 void retirer_operation(Operation *op,Operation *list);
+
 #endif // OPERATION_H_INCLUDED
