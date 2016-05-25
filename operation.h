@@ -10,8 +10,8 @@ typedef enum Type_operation {DEBIT, CREDIT} Type_operation;
 typedef struct Operation Operation;
 
 struct Operation {
-    char date[9];
-    char titre[32];
+    char* date;
+    char* titre;
     Type_operation type;
     double valeur;
     Categorie categorie;
@@ -23,4 +23,7 @@ Operation* nouvelle_operation(char D[9], char t[32], Type_operation type, double
 
 void retirer_operation(Operation *op,Operation *list);
 
+static Operation* ParserOperation (const char * nomDuFichier);
+
+static void freeOperation (Operation ** p);
 #endif // OPERATION_H_INCLUDED
