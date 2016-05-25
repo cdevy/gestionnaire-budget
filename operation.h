@@ -16,7 +16,7 @@ struct Operation {
     double valeur;
     Categorie categorie;
     SousCategorie sousCategorie;
-    Operation *next; //pointe vers la prochaine opération 
+    Operation *next; //pointe vers la prochaine operation 
 };
 
 Operation* nouvelle_operation(char D[9], char t[32], Type_operation type, double valeur, Operation *suivant);
