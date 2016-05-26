@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "categorie.h"
 #include "operation.h"
 
 
-#define DELIM ";"
-#define BUFF_SIZE 128
+#define DELIM ","
+#define BUFF_SIZE 1024
 
 
 Operation* nouvelle_operation(char* D, char* t, Type_operation type, double valeur, Operation *suivant) {
@@ -15,21 +14,11 @@ Operation* nouvelle_operation(char* D, char* t, Type_operation type, double vale
     strcpy(o -> titre, t);
     o -> type = type;
     o -> valeur = valeur;
-    o -> categorie = QUOTIDIEN;
-    o -> sousCategorie = ALIMENTATION;
+    //o -> categorie = AUCUN;
+    //o -> sousCategorie = AUCUN2;
     o -> next = suivant;
     return o;
 }
-
-typedef enum
-{
-   DATE,
-   TITRE,
-   TYPEOPERATION,
-   VALEUR,
- 
-   NB_TYPE
-}Operation_type;
 
 
 void retirer_operation(Operation *op, Operation *list) {
@@ -44,7 +33,7 @@ void retirer_operation(Operation *op, Operation *list) {
 }
 
 
-static char * str_dup (const char * str)
+char * str_dup (const char * str)
 {
    char * dup = NULL;
    if (str != NULL)
@@ -60,64 +49,44 @@ static char * str_dup (const char * str)
 }
 
 
-
-static Operation* ParserOperation (const char * nomDuFichier){
-	char*  categorie;
-	char*  sousCategorie;
+Operation* ParserOperation (const char * nomDuFichier){
+	int  categorie;
+	int  sousCategorie;
 	Operation* o = NULL;
 	FILE*  fichier  = NULL;
-	char*  token = NULL;
+	char*  date = NULL;
+	char*  titre = NULL;
+	char*  type = NULL;
+	char*  valeur = NULL;
 	char   buff [BUFF_SIZE];
+	Type_operation type1 = DEBIT ;
+	double val =0;
+	Operation* op = NULL;
 
 	fichier = fopen(nomDuFichier, "r");
 
-
     if (fichier != NULL){
 		if ((fgets (buff, BUFF_SIZE, fichier)) != NULL){
+			fgets (buff, BUFF_SIZE, fichier);
 			char * p = buff;
 			int i = 0;
-			
-			o = (Operation *)malloc(sizeof (* o));
+			o = (Operation *)malloc(sizeof (Operation));
 			
 			if (o != NULL){
-				while ((token = strtok(p, DELIM)) != NULL){
-					if (i == 0){ p = NULL; }
-					char * tmp;
-					double valeur;
-					switch (i){
-						case DATE:
-							o -> date = str_dup (token);
-							break;
-                     
-						case TITRE:
-							o -> titre = str_dup (token);
-							break;
-
-						case TYPEOPERATION:
-							tmp = str_dup (token);
-							if (strcmp(tmp,"DEBIT")==0){
-								o -> type = DEBIT;
+				  date = strtok(p, DELIM);
+				
+				  titre = strtok(NULL, DELIM);
+				
+				  type = strtok(NULL, DELIM);
+				  if (strcmp(type,"DEBIT")==0){
+								type1 = DEBIT;
 							}else{
-								o -> type = CREDIT;
+								type1 = CREDIT;
 							}
-							break;
-                     
-						case VALEUR:
-							valeur = strtol (token, NULL, 10);
-							o -> valeur = valeur;              
-							break;
-							
-						default:
-							break;
-               }
-               printf("veuillez entrer une catégorie \n");
-			   scanf("%s", &categorie);
-			   o -> categorie = categorie;
-			   printf("veuillez entrer une sous catégorie \n");
-			   scanf("%s", &sousCategorie);
-			   o -> sousCategorie = sousCategorie;
-               i++;
-            }
+				
+				  valeur = strtok(NULL, DELIM);
+				  val = atof(valeur);
+				  op = nouvelle_operation(date, titre, type1, val, NULL);
          }
       }
       fclose (fichier);
@@ -129,13 +98,10 @@ static Operation* ParserOperation (const char * nomDuFichier){
    return o;
 }
 
-
-static void freeOperation (Operation ** p){
+void freeOperation (Operation ** p){
    if (p != NULL && *p != NULL){
       free ((*p)->date);
       free ((*p)->titre);
-      free ((*p)->type);
-      free ((*p)->valeur);
       free (*p);
       *p = NULL;
    }
@@ -143,7 +109,7 @@ static void freeOperation (Operation ** p){
 
 
 int main (void){
-   Operation * o = ParserOperation("Relevé.csv");
+   Operation * o = ParserOperation("test.csv");
    if (o != NULL){
       printf ("Date : %s Titre : %s Type : %s Valeur : %d\n", o -> date, o -> titre, o-> type, o -> valeur);
       freeOperation (& o);
