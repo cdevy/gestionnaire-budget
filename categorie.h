@@ -18,6 +18,10 @@ void affiche_categories(int affichage);
 
 void affiche_sousCategories(Categorie cat, int affichage);
 
+char* nom_cat(Categorie cat);
+
+char* nom_sousCat(SousCategorie sscat);
+
 double budget_max_cat(Compte* c, Categorie cat);
 
 void setBudget_max_cat(Compte* c, Categorie cat, double max);
