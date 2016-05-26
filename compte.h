@@ -20,7 +20,7 @@ struct Compte {
     char* agence;
     double solde;
     char* nomFichier;
-    double budgetsCat[NB_CAT];
+    double budgetsMax[NB_CAT];
     Operation* liste_op;
     //Flux* flux;
     Compte* next;
