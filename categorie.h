@@ -6,9 +6,9 @@ Definit les categories et sous-categories
 Permet de classer les operations et de fixer un budget par categorie
 */
 
-typedef enum Categorie {QUOTIDIEN, LOISIRS, SANTE, HABITATION, TRANSPORTS, IMPOTS_SOLIDARITE, PROFESSIONNEL, EPARGNE, DIVERS} Categorie;
+typedef enum Categorie {QUOTIDIEN, LOISIRS, SANTE, HABITATION, TRANSPORTS, IMPOTS_SOLIDARITE, PROFESSIONNEL, EPARGNE, DIVERS, AUCUN} Categorie;
 
-typedef enum SousCategorie {ALIMENTATION, HABILLEMENT, BANQUE, CULTURE, PRESSE, RESTAURANTS_SORTIES, WEEKENDS_VACANCES, CADEAUX, MEDECINS, PHARMACIE, SECU_MUTUELLES, LOYER, GAZ_ELECTRICITE, EAU, TELEPHONIE_INTERNET, ASSURANCES, ABONNEMENTS, BILLETS, PARKING, CARBURANT, ENTRETIEN, IR, FONCIER, HABITATION2, DONS, MATERIEL, REPAS, VOYAGES, DIVERS2} SousCategorie;
+typedef enum SousCategorie {ALIMENTATION, HABILLEMENT, BANQUE, CULTURE, PRESSE, RESTAURANTS_SORTIES, WEEKENDS_VACANCES, CADEAUX, MEDECINS, PHARMACIE, SECU_MUTUELLES, LOYER, GAZ_ELECTRICITE, EAU, TELEPHONIE_INTERNET, ASSURANCES, ABONNEMENTS, BILLETS, PARKING, CARBURANT, ENTRETIEN, IR, FONCIER, HABITATION2, DONS, MATERIEL, REPAS, VOYAGES, DIVERS2, AUCUN2} SousCategorie;
 
 void gestion_categories();
 
@@ -16,9 +16,9 @@ void affiche_categories(int affichage);
 
 void affiche_sousCategories(Categorie cat, int affichage);
 
-double budget_max(Categorie cat);
+double budget_max_cat(Compte* c, Categorie cat);
 
-void setBudget_max(Categorie cat, double max);
+void setBudget_max_cat(Compte* c, Categorie cat, double max);
 
 //void affiche_operations(Categorie cat);
 

@@ -3,6 +3,38 @@
 #include <string.h>
 #include "categorie.h"
 
+#define NB_CAT 9
+#define NB_MAX_SSCAT 7
+
+/*
+Budget_max* initialise_budget_max() {
+    Budget_max* b = (Budget_max*) malloc(sizeof(Budget_max));
+    b->table = (double**) malloc(NB_CAT * sizeof(double*));
+    if(b->table != NULL) {
+	int i;
+	for (i=0; i<NB_CAT; i++) {
+	    b->table[i] = (double*) malloc((NB_MAX_SSCAT+1) * sizeof(double));
+	    if (b->table[i] == NULL) {
+		free_budget(b);
+		return NULL;
+	    }
+	}
+    }    
+    return b;
+}
+
+void free_budget(Budget_max* b) {
+    if (b->table != NULL) {
+	int i;
+	for (i=0; i<NB_CAT; i++) {
+	    if (b->table[i] != NULL) {
+		free(b->table[i]);
+	    }
+	}
+	free(b->table);
+    }
+    free(b);
+}*/
 
 void affiche_categories(int affichage) {
     if (affichage) {
@@ -110,7 +142,7 @@ void gestion_categories() {
 	    scanf("%d", &choix);	    
 	    break;
 	case 8:
-	    affiche_sousCategories(EPARGNE, 0);   	    
+	    affiche_sousCategories(EPARGNE, 0);
 	    break;
 	case 9:
 	    affiche_sousCategories(DIVERS, 0);    	    
@@ -118,6 +150,18 @@ void gestion_categories() {
 	default:
     	    printf("La categorie choisie n'existe pas\n");
     	    break;
+    }
+}
+
+double budget_max_cat(Compte* c, Categorie cat) {
+    return c->budgetsMax[cat];
+}
+
+void setBudget_max_cat(Compte* c, Categorie cat, double max) {
+    if (max >= 0) {
+        b->table[cat][0] = max;
+    } else {
+	printf("La valeur est incorrecte");
     }
 }
 
