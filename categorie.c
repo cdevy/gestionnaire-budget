@@ -153,6 +153,9 @@ char* nom_cat(Categorie cat) {
 	case DIVERS:
 	    nom = "Divers";    	    
 	    break;
+	case AUCUN:
+	    nom = "Aucune";    	    
+	    break;
 	default:
     	    printf("La categorie n'existe pas\n");
     	    break;
@@ -246,6 +249,9 @@ char* nom_sousCat(SousCategorie sscat) {
 	    break;
 	case DIVERS2:
 	    nom = "Divers";    	    
+	    break;
+	case AUCUN2:
+	    nom = "Aucune";    	    
 	    break;
 	default:
     	    printf("La categorie n'existe pas\n");

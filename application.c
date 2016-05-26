@@ -24,7 +24,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    liste2 = gestion_comptes(liste, choix);
 	    break;
 	case 2:
-	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher le RIB d'un compte\n3. Afficher la liste des comptes\n4. Afficher le budget maximal par categorie\nTapez 0 pour revenir au menu precedent\n");
+	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher les informations liees a un compte\n3. Afficher la liste des comptes\n4. Afficher le budget maximal par categorie\nTapez 0 pour revenir au menu precedent\n");
             scanf("%d", &choix);
 	    printf("\n");
 	    gestion_informations(liste, choix);
@@ -62,11 +62,11 @@ Comptes gestion_comptes(Comptes liste, int choix) {
 	    vider_buffer();
 	    if (taille_long(numero) != 10) {
 		printf("Le numero de compte est invalide\n");
-		break;
+		return liste2;
 	    }
 	    if(compte(liste, numero) != NULL) {
 		printf("Ce numero correspond a un autre compte\n");
-		break;
+		return liste2;
 	    }
 	    char nom[30];
 	    printf("Nom du compte :");
@@ -99,7 +99,9 @@ Comptes gestion_comptes(Comptes liste, int choix) {
 	case 2:
     	    printf("Entrez le numero (10 chiffres) du compte a supprimer :");
        	    scanf("%ld", &numero);
-	    if (compte(liste, numero) != NULL) {
+	    if (taille_long(numero) != 10) {
+		printf("Le numero de compte est invalide\n");
+	    } else if (compte(liste, numero) != NULL) {
 		liste2 = suppression(liste, compte(liste, numero));
 		printf("Le compte a bien ete supprime");
 	    } else {

@@ -43,11 +43,19 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
 	    c->budgetsMax[i] = -1;
     	}
 	c-> liste_op = NULL;
-	/* Création du fichier de sauvegarde s'il n'existe pas encore */
+	c-> flux = NULL;
+	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
             fprintf(fichier, "Compte : %ld (%s)\nProprietaire : %s\nBanque : %s\nAgence : %s\n", c->numero, c->nom, c->proprietaire, c->banque, c->agence);
             fclose(fichier);
+	}
+	/* Création du fichier de sauvegarde des flux s'il n'existe pas encore */
+	char nomFlux[20] = "flux ";
+        nomFlux = strcat(strcat(nomFlux, noCpte),".txt");
+	if (fopen(nomFlux, "r") == NULL) {
+            FILE* fichier2 = fopen(nomFlux, "w");
+            fclose(fichier2);
 	}
     } else {
     	free(c);
@@ -74,6 +82,13 @@ Comptes suppression(Comptes liste, Compte* compte) {
         return NULL;
     }
     if(liste == compte) {
+	FILE* fichier = fopen(compte->nomFichier, "a+");
+        if (fichier != NULL) {
+	    time_t t;
+    	    time(&t);
+	    fprintf(fichier, "\nCompte cloturé le %s\n", ctime(&t));
+        }
+        fclose(fichier);
         Compte* temp = liste->next;
 	free_compte(compte);
         return temp;
@@ -123,9 +138,9 @@ void sauvegarde(Compte* compte) {
 	while (op != NULL) {
 	    fprintf(fichier, "Date : %s, Titre : %s, ", op->date, op->titre);
 	    if (op->type == DEBIT) {
-		fprintf(fichier, "Type : Debit"); 
+		fprintf(fichier, "Type : Debit, "); 
 	    } else {
-		fprintf(fichier, "Type : Credit"); 
+		fprintf(fichier, "Type : Credit, "); 
 	    }
 	    fprintf(fichier, "Valeur : %f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
 	    op = op->next;
@@ -150,17 +165,6 @@ int retrait(Compte* c, double valeur) { /* valeur >=0 */
     }
     return 0;
 }
-/*
-int virement(Compte* debiteur, Compte* crediteur, double valeur) {
-    if (debiteur != NULL && crediteur != NULL) {
-	if (retrait(debiteur, valeur) && depot(crediteur, valeur)) {
-	    retrait(debiteur, valeur);
-	    depot(crediteur, valeur);   
-	    return 1;
-	}
-    }
-    return 0;
-}*/
 
 Compte* compte(Comptes liste, long numero) {
     Compte* c = liste;
@@ -171,19 +175,6 @@ Compte* compte(Comptes liste, long numero) {
         c = c->next;
     }
     return NULL;
-}
-
-int nb_comptes(Comptes liste) {
-    if (liste == NULL) {
-	return 0;
-    }
-    Compte* c = liste;
-    int nb = 0;
-    while(c != NULL) {
-        c = c->next;
-	nb++;
-    }
-    return nb;
 }
 
 Comptes lire_liste(Comptes liste) {
@@ -219,12 +210,14 @@ Comptes lire_liste(Comptes liste) {
     return liste2;
 }
 
-Comptes sauvegarder_liste(Comptes liste) {
+void sauvegarder_liste(Comptes liste) {
     Comptes liste2 = liste;
     FILE* fichier = fopen("sauvegarde comptes.txt", "w+");
     if (fichier != NULL) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
 	while (liste2 != NULL) {
+	    sauvegarde(liste2);
+	    sauvegarde_flux(liste2);
 	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€, [ ", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
 	    int i;
     	    for (i=0; i<NB_CAT; i++) {
@@ -235,6 +228,5 @@ Comptes sauvegarder_liste(Comptes liste) {
 	}
         fclose(fichier);
     }
-    return liste2;
 }
 
