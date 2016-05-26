@@ -4,6 +4,8 @@
 #include <time.h>
 #include "utils.h"
 #include "compte.h"
+#include "categorie.h"
+#include "operation.h"
 
 #define TAILLE_LIGNE 63
 
@@ -40,6 +42,7 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
     	for (i=0; i<NB_CAT; i++) {
 	    c->budgetsMax[i] = -1;
     	}
+	c-> liste_op = NULL;
 	/* Création du fichier de sauvegarde s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
@@ -112,11 +115,21 @@ void affiche_budgetsMax(Compte* compte) {
 }
 
 void sauvegarde(Compte* compte) {
-    FILE* fichier = fopen(compte->nomFichier, "w+");
+    FILE* fichier = fopen(compte->nomFichier, "a+");
     if (fichier != NULL) {
 	time_t t;
     	time(&t);
-        fprintf(fichier, "Compte : %ld (%s)\nProprietaire : %s\nBanque : %s\nAgence : %s\n", compte->numero, compte->nom, compte->proprietaire, compte->banque, compte->agence);
+        Operation* op = compte->liste_op;
+	while (op != NULL) {
+	    fprintf(fichier, "Date : %s, Titre : %s, ", op->date, op->titre);
+	    if (op->type == DEBIT) {
+		fprintf(fichier, "Type : Debit"); 
+	    } else {
+		fprintf(fichier, "Type : Credit"); 
+	    }
+	    fprintf(fichier, "Valeur : %f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
+	    op = op->next;
+	}
 	fprintf(fichier, "\nSolde actuel : %f€ mis à jour le %s\n", compte->solde, ctime(&t));
         fclose(fichier);
     }
@@ -137,8 +150,8 @@ int retrait(Compte* c, double valeur) { /* valeur >=0 */
     }
     return 0;
 }
-
-int virement(Compte* debiteur, Compte* crediteur, double valeur) { /* valeur >=0 */
+/*
+int virement(Compte* debiteur, Compte* crediteur, double valeur) {
     if (debiteur != NULL && crediteur != NULL) {
 	if (retrait(debiteur, valeur) && depot(crediteur, valeur)) {
 	    retrait(debiteur, valeur);
@@ -147,7 +160,7 @@ int virement(Compte* debiteur, Compte* crediteur, double valeur) { /* valeur >=0
 	}
     }
     return 0;
-}
+}*/
 
 Compte* compte(Comptes liste, long numero) {
     Compte* c = liste;

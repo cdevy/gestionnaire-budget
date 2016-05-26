@@ -7,7 +7,7 @@
 
 int menu() {
     int choix;
-    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Consulter les comptes disponibles\n3. Realiser une transaction\n4. Consulter les categories\n");
+    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Consulter l'etat d'un compte\n3. Realiser une transaction\n4. Consulter les categories\n");
     scanf("%d", &choix);
     printf("\n");
     return choix;

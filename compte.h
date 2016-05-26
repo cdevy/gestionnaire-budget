@@ -1,6 +1,7 @@
 #ifndef COMPTE_H_INCLUDED
 #define COMPTE_H_INCLUDED
 
+#include "operation.h"
 #define NB_CAT 9
 
 /*
@@ -19,6 +20,7 @@ struct Compte {
     double solde;
     char* nomFichier;
     double budgetsMax[NB_CAT];
+    Operation* liste_op;
     Compte* next;
 };
 

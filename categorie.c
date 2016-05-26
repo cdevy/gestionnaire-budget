@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "categorie.h"
-#include "compte.h"
 
 #define NB_CAT 9
 #define NB_MAX_SSCAT 7
@@ -20,7 +19,7 @@ void affiche_sousCategories(Categorie cat, int affichage) {
 	    if (affichage) {
 		printf("Les sous-categories de Vie Quotidienne sont :\n");
 	    }
-	    printf("1.Alimentation\n2.Habillement\n3.Ma Banque\n4.Divers\n");
+	    printf("1.Alimentation\n2.Habillement\n3.Banque\n4.Divers\n");
 	    break;
 	case LOISIRS:
 	    if (affichage) {
@@ -124,15 +123,134 @@ void gestion_categories() {
     }
 }
 
-double budget_max_cat(Compte* c, Categorie cat) {
-    return c->budgetsMax[cat];
+char* nom_cat(Categorie cat) {
+    char* nom = NULL;
+    switch (cat) {
+	case QUOTIDIEN:
+	    nom = "Vie Quotidienne";
+	    break;
+	case LOISIRS:
+	    nom = "Loisirs";    	    
+	    break;
+	case SANTE:
+	    nom = "Sante";    	    
+	    break;
+	case HABITATION: 
+	    nom = "Habitation";  	    
+	    break;
+	case TRANSPORTS: 
+	    nom = "Transports";  	    
+	    break;
+	case IMPOTS_SOLIDARITE:
+	    nom = "Impots & Solidarite";   	    
+	    break;
+	case PROFESSIONNEL: 
+	    nom = "Professionnel";  
+	    break;
+	case EPARGNE: 
+	    nom = "Epargne";   	    
+	    break;
+	case DIVERS:
+	    nom = "Divers";    	    
+	    break;
+	default:
+    	    printf("La categorie n'existe pas\n");
+    	    break;
+    }
+    return nom;
 }
 
-void setBudget_max_cat(Compte* c, Categorie cat, double max) {
-    if (max >= 0) {
-        c->budgetsMax[cat] = max;
-    } else {
-	printf("La valeur est incorrecte");
+char* nom_sousCat(SousCategorie sscat) {
+    char* nom = NULL;
+    switch (sscat) {
+	case ALIMENTATION:
+	    nom = "Alimentation";
+	    break;
+	case BANQUE:
+	    nom = "Banque";    	    
+	    break;
+	case CULTURE:
+	    nom = "Culture";    	    
+	    break;
+	case PRESSE: 
+	    nom = "Presse";  	    
+	    break;
+	case RESTAURANTS_SORTIES: 
+	    nom = "Restaurants & Sorties";  	    
+	    break;
+	case WEEKENDS_VACANCES:
+	    nom = "Week-ends & Vacances";   	    
+	    break;
+	case CADEAUX: 
+	    nom = "Cadeaux";  
+	    break;
+	case MEDECINS: 
+	    nom = "Medecins";   	    
+	    break;
+	case PHARMACIE: 
+	    nom = "Pharmacie";   	    
+	    break;
+	case SECU_MUTUELLES: 
+	    nom = "Sécurite sociale & Mutuelles";   	    
+	    break;
+	case LOYER: 
+	    nom = "Loyer";   	    
+	    break;
+	case GAZ_ELECTRICITE: 
+	    nom = "Gaz & Electricite";   	    
+	    break;
+	case EAU: 
+	    nom = "Eau";   	    
+	    break;
+	case TELEPHONIE_INTERNET: 
+	    nom = "Telephonie & Internet";   	    
+	    break;
+	case ASSURANCES: 
+	    nom = "Assurances";   	    
+	    break;
+	case ABONNEMENTS: 
+	    nom = "Abonnements";   	    
+	    break;
+	case BILLETS: 
+	    nom = "Billets";   	    
+	    break;
+	case PARKING: 
+	    nom = "Parking";   	    
+	    break;
+	case CARBURANT: 
+	    nom = "Carburant";   	    
+	    break;
+	case ENTRETIEN: 
+	    nom = "Entretien";   	    
+	    break;
+	case IR: 
+	    nom = "Impot sur le Revenu";   	    
+	    break;
+	case FONCIER: 
+	    nom = "Taxes foncieres";   	    
+	    break;
+	case HABITATION2: 
+	    nom = "Taxe d'habitation";   	    
+	    break;
+	case DONS: 
+	    nom = "Dons";   	    
+	    break;
+	case MATERIEL: 
+	    nom = "Materiel";   	    
+	    break;
+	case REPAS: 
+	    nom = "Repas";   	    
+	    break;
+	case VOYAGES: 
+	    nom = "Voyages";   	    
+	    break;
+	case DIVERS2:
+	    nom = "Divers";    	    
+	    break;
+	default:
+    	    printf("La categorie n'existe pas\n");
+    	    break;
     }
+    return nom;
 }
 

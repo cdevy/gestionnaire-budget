@@ -1,8 +1,6 @@
 #ifndef CATEGORIE_H_INCLUDED
 #define CATEGORIE_H_INCLUDED
 
-#include "compte.h"
-
 /*
 Definit les categories et sous-categories
 Permet de classer les operations et de fixer un budget par categorie
@@ -18,9 +16,9 @@ void affiche_categories(int affichage);
 
 void affiche_sousCategories(Categorie cat, int affichage);
 
-double budget_max_cat(Compte* c, Categorie cat);
+char* nom_cat(Categorie cat);
 
-void setBudget_max_cat(Compte* c, Categorie cat, double max);
+char* nom_sousCat(SousCategorie sscat);
 
 //void affiche_operations(Categorie cat);
 
