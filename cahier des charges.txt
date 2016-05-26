@@ -17,7 +17,7 @@ fichier catégorie --> permet de gérer les infos (ajouter catégories, assigner un
 C
 
 fichier statistiques --> permet de faire des graphiques à partir des infos (dépenses mensuelles...) 
-generer un menu (graphique par catégories, balance, dépense, entrée)
+generer un menu (graphique par catégories, balance, dépenses, entrées)
 C - J
 
 Génerer des tests 

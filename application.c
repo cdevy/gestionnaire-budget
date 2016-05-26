@@ -7,7 +7,7 @@
 
 int menu() {
     int choix;
-    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Voir les informations liees a un compte\n3. Realiser une transaction\n4. Categoriser une operation\n");
+    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Consulter les comptes disponibles\n3. Realiser une transaction\n4. Consulter les categories\n");
     scanf("%d", &choix);
     printf("\n");
     return choix;
@@ -24,7 +24,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    liste2 = gestion_comptes(liste, choix);
 	    break;
 	case 2:
-	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher le RIB d'un compte\nTapez 0 pour revenir au menu precedent\n");
+	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher le RIB d'un compte\n3. Afficher la liste des comptes\nTapez 0 pour revenir au menu precedent\n");
             scanf("%d", &choix);
 	    printf("\n");
 	    gestion_informations(liste, choix);
@@ -64,6 +64,10 @@ Comptes gestion_comptes(Comptes liste, int choix) {
 		printf("Le numero de compte est invalide\n");
 		break;
 	    }
+	    if(compte(liste, numero) != NULL) {
+		printf("Ce numero correspond a un autre compte\n");
+		break;
+	    }
 	    char nom[30];
 	    printf("Nom du compte :");
             fgets(nom, 30, stdin);
@@ -97,7 +101,7 @@ Comptes gestion_comptes(Comptes liste, int choix) {
        	    scanf("%ld", &numero);
 	    if (compte(liste, numero) != NULL) {
 		liste2 = suppression(liste, compte(liste, numero));
-		printf("Le compte a bien ete cree");
+		printf("Le compte a bien ete supprime");
 	    } else {
 		printf("Le compte n'a pas pu etre supprime");		
 	    }
@@ -142,6 +146,14 @@ void gestion_informations(Comptes liste, int choix) {
 	    } else {
 		printf("Le numero de compte est invalide\n");
 	    }
+	    break;
+	case 3:
+	    printf("Ci-dessous la liste des comptes enregistres :\n");
+    	    Compte* c2 = liste;
+     	    while(c2 != NULL) {
+		printf("%ld  %s  %s\n", c2->numero, c2->nom, c2->proprietaire); 
+                c2 = c2->next;
+   	    }
 	    break;
 	default:
     	    printf("L'action choisie n'existe pas\n");

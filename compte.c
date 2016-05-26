@@ -5,6 +5,8 @@
 #include "utils.h"
 #include "compte.h"
 
+#define TAILLE_LIGNE 63
+
 Comptes initialiser() {
     Comptes liste = NULL;
     return liste;
@@ -31,9 +33,10 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
         c->solde = solde;
 	char noCpte[10] = "";
 	sprintf(noCpte, "%ld", c->numero);
-        c->nomFichier = (char*) malloc(25);
+        c->nomFichier = (char*) malloc(45);
 	strcpy(c->nomFichier, c->nom);
 	c->nomFichier = strcat(strcat(strcat(c->nomFichier, " "), noCpte),".txt");
+	c->budgetsMax = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
 	/* Création du fichier de sauvegarde s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
@@ -152,5 +155,50 @@ int nb_comptes(Comptes liste) {
 	nb++;
     }
     return nb;
+}
+
+Comptes lire_liste(Comptes liste) {
+    long numero;
+    char nom[30];
+    char proprietaire[30]; 
+    char banque[30];
+    char agence[30];
+    double solde;
+    double budgetsMax[9];
+    Comptes liste2 = liste;
+    FILE* fichier = fopen("sauvegarde comptes.txt", "r");
+    if (fichier != NULL) {
+	char premiere_ligne[TAILLE_LIGNE];
+        fgets(premiere_ligne, TAILLE_LIGNE, fichier);
+	if (premiere_ligne != NULL) {
+	    while(!feof(fichier)) { 
+	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf€, [%lf %lf %lf %lf %lf %lf %lf %lf %lf]\n", &numero, nom, proprietaire, banque, agence, &solde, liste2->budgetsMax[0], liste2->budgetsMax[1], liste2->budgetsMax[2], liste2->budgetsMax[3], liste2->budgetsMax[4], liste2->budgetsMax[5], liste2->budgetsMax[6], liste2->budgetsMax[7], liste2->budgetsMax[8]);
+	        Compte* c = nouveau_compte(nom, numero, proprietaire, banque, agence, solde);
+		c->budgetsMax = budgetsMax;
+	        if (c != NULL) {
+		    liste2 = ajouter(liste2, c);
+	        } else {
+		    printf("Erreur : le compte n'a pas pu etre ajoute");
+	        }
+	    }
+	}
+        fclose(fichier);
+    }
+    return liste2;
+}
+
+Comptes sauvegarder_liste(Comptes liste) {
+    Comptes liste2 = liste;
+    FILE* fichier = fopen("sauvegarde comptes.txt", "w+");
+    if (fichier != NULL) {
+	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
+	while (liste2 != NULL) {
+	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
+	    fprintf(", [%f %f %f %f %f %f %f %f %f]\n", liste2->budgetsMax[0], liste2->budgetsMax[1], liste2->budgetsMax[2], liste2->budgetsMax[3], liste2->budgetsMax[4], liste2->budgetsMax[5], liste2->budgetsMax[6], liste2->budgetsMax[7], liste2->budgetsMax[8]);
+	    liste2 = liste2->next;
+	}
+        fclose(fichier);
+    }
+    return liste2;
 }
 

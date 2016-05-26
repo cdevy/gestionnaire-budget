@@ -16,6 +16,7 @@ struct Compte {
     char* agence;
     double solde;
     char* nomFichier;
+    double budgetsMax[9];
     Compte* next;
 };
 
@@ -48,5 +49,9 @@ int virement(Compte* debiteur, Compte* crediteur, double valeur);
 Compte* compte(Comptes liste, long numero);
 
 int nb_comptes(Comptes liste);
+
+Comptes lire_liste(Comptes liste);
+
+Comptes sauvegarder_liste(Comptes liste);
 
 #endif
