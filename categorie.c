@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "categorie.h"
-#include "compte.h"
 
 #define NB_CAT 9
 #define NB_MAX_SSCAT 7
@@ -245,7 +244,7 @@ char* nom_sousCat(SousCategorie sscat) {
 	case VOYAGES: 
 	    nom = "Voyages";   	    
 	    break;
-	case DIVERS:
+	case DIVERS2:
 	    nom = "Divers";    	    
 	    break;
 	default:
@@ -253,17 +252,5 @@ char* nom_sousCat(SousCategorie sscat) {
     	    break;
     }
     return nom;
-}
-
-double budget_max_cat(Compte* c, Categorie cat) {
-    return c->budgetsMax[cat];
-}
-
-void setBudget_max_cat(Compte* c, Categorie cat, double max) {
-    if (max >= 0) {
-        c->budgetsMax[cat] = max;
-    } else {
-	printf("La valeur est incorrecte");
-    }
 }
 

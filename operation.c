@@ -33,7 +33,7 @@ void retirer_operation(Operation *op, Operation *list) {
 }
 
 
-static char * str_dup (const char * str)
+char * str_dup (const char * str)
 {
    char * dup = NULL;
    if (str != NULL)
@@ -50,7 +50,7 @@ static char * str_dup (const char * str)
 
 
 
-static Operation* ParserOperation (const char * nomDuFichier){
+Operation* ParserOperation (const char * nomDuFichier){
 	char*  categorie;
 	char*  sousCategorie;
 	Operation* o = NULL;
@@ -119,7 +119,7 @@ static Operation* ParserOperation (const char * nomDuFichier){
 }
 
 
-static void freeOperation (Operation ** p){
+void freeOperation (Operation ** p){
    if (p != NULL && *p != NULL){
       free ((*p)->date);
       free ((*p)->titre);

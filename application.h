@@ -1,6 +1,8 @@
 #ifndef APPLICATION_H_INCLUDED
 #define APPLICATION_H_INCLUDED
 
+#include "compte.h"
+
 /*
 Gestion de l'interface utilisateur
 */

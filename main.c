@@ -69,7 +69,7 @@ int main () {
     c1->liste_op = nouvelle_operation("26/05/16", "essai", DEBIT, -50, NULL);;
     suppression(liste, c1);
     //suppression(liste, c2);
-    */
+    
 
     /* Tests fichier categorie.c */
     /*
