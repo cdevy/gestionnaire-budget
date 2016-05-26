@@ -1,9 +1,9 @@
 Date,Titre,TypeOperation,valeur
-10/05/16,croissant achat,DEBIT,7
-10/05/16,bourse,CREDIT,300
-12/05/16,virement,CREDIT,200
-13/05/16,livre achat,DEBIT,20
-13/05/16,essence achat,DEBIT,50
-20/05/16,hotêl,DEBIT,250
-25/05/16,virement,CREDIT,120
-05/06/16,loyer,DEBIT,390
+10/05/16,Achat de croissant,DEBIT,0.7
+10/05/16,Bourse,CREDIT,300
+12/05/16,Virement,CREDIT,200
+13/05/16,Achat de livre,DEBIT,20
+13/05/16,Achat d'essence,DEBIT,50
+20/05/16,Hotêl,DEBIT,250
+25/05/16,Virement,CREDIT,120
+05/06/16,Loyer,DEBIT,390

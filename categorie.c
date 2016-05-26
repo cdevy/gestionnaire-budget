@@ -17,55 +17,54 @@ void affiche_sousCategories(Categorie cat, int affichage) {
     switch (cat) {
 	case QUOTIDIEN:
 	    if (affichage) {
-		printf("Les sous-categories de Vie Quotidienne sont :\n");
+			printf("Les sous-categories de Vie Quotidienne sont :\n");
 	    }
-	    printf("1.Alimentation\n2.Habillement\n3.Banque\n4.Divers\n");
+	    printf("1.Alimentation\n2.Habillement\n3.Banque\n29.Divers\n");
 	    break;
 	case LOISIRS:
 	    if (affichage) {
-		printf("Les sous-categories de Loisirs sont :\n");
+			printf("Les sous-categories de Loisirs sont :\n");
 	    }
-	    printf("1.Culture\n2.Presse\n3.Restaurants & Sorties\n4.Week-ends & Vacances\n5.Cadeaux\n6.Divers\n");    	    
+	    printf("4.Culture\n5.Presse\n6.Restaurants & Sorties\n7.Week-ends & Vacances\n8.Cadeaux\n29.Divers\n");    	    
 	    break;
 	case SANTE:
 	    if (affichage) {
-		printf("Les sous-categories de Sante sont :\n");
+			printf("Les sous-categories de Sante sont :\n");
 	    }
-	    printf("1.Medecins\n2.Pharmacie\n3.Securite sociale & Mutuelles\n4.Divers\n");    	    
+	    printf("9.Medecins\n10.Pharmacie\n11.Securite sociale & Mutuelles\n29.Divers\n");    	    
 	    break;
 	case HABITATION:
 	    if (affichage) {
-		printf("Les sous-categories de Habitation sont :\n");
+			printf("Les sous-categories de Habitation sont :\n");
 	    }
-	    printf("1.Loyer\n2.Gaz & Electricite\n3.Eau\n4.Telephonie & Internet\n5.Assurances\n6.Divers\n");     	    
+	    printf("12.Loyer\n13.Gaz & Electricite\n14.Eau\n15.Telephonie & Internet\n16.Assurances\n6.Divers\n");     	    
 	    break;
 	case TRANSPORTS:
 	    if (affichage) {
-		printf("Les sous-categories de Habitation sont :\n");
+			printf("Les sous-categories de Habitation sont :\n");
 	    }
-	    printf("1.Abonnements\n2.Billets\n3.Parking\n4.Carburant\n5.Entretien\n6.Assurances\n7.Divers\n");    	    
+	    printf("17.Abonnements\n18.Billets\n19.Parking\n20.Carburant\n21.Entretien\n16.Assurances\n29.Divers\n");    	    
 	    break;
 	case IMPOTS_SOLIDARITE:
 	    if (affichage) {
-		printf("Les sous-categories de Impots & Solidarite sont :\n");
+			printf("Les sous-categories de Impots & Solidarite sont :\n");
 	    }
-	    printf("1.Impot sur le revenu\n2.Taxes foncieres\n3.Taxe d'habitation\n4.Dons\n5.Divers\n");    	    
+	    printf("22.Impot sur le revenu\n23.Taxes foncieres\n24.Taxe d'habitation\n25.Dons\n29.Divers\n");    	    
 	    break;
 	case PROFESSIONNEL:
 	    if (affichage) {
-		printf("Les sous-categories de Professionnel sont :\n");
+			printf("Les sous-categories de Professionnel sont :\n");
 	    }
-	    printf("1.Materiel\n2.Repas\n3.Voyages\n4.Divers\n");   
+	    printf("26.Materiel\n27.Repas\n28.Voyages\n29.Divers\n");   
 	    break;
 	case EPARGNE:
-    	    printf("La categorie Epargne n'a pas de sous-categories\n");    	    
+    	printf("La categorie Epargne n'a pas de sous-categories, entrez 0\n");    	    
 	    break;
 	case DIVERS:
-    	    printf("La categorie Divers n'a pas de sous-categories\n");    	    
+    	printf("La categorie Divers n'a pas de sous-categories, entrez 0\n");    	    
 	    break;
 	default:
-    	    printf("La categorie n'existe pas\n");
-    	    break;
+		break;
     }
 }
 
@@ -78,7 +77,7 @@ void gestion_categories() {
     switch (choix) {
 	case 1:
 	    printf("Choisissez parmi les sous-categories suivantes :\n");
-    	    affiche_sousCategories(QUOTIDIEN, 0);
+    	affiche_sousCategories(QUOTIDIEN, 0);
 	    scanf("%d", &choix);
 	    break;
 	case 2:

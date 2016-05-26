@@ -45,9 +45,11 @@ Operation* ParserOperation (const char * nomDuFichier){
 	Type_operation type1 = DEBIT ;
 	float val =0;
 	Operation* op = NULL;
+	int choixCat;
+	int choixSousCat;
 
 	fichier = fopen(nomDuFichier, "r");
-
+	fgets (buff, BUFF_SIZE, fichier);
     if (fichier != NULL){
 		while(fgets (buff, BUFF_SIZE, fichier)!=NULL){
 			char * p = buff;
@@ -60,8 +62,15 @@ Operation* ParserOperation (const char * nomDuFichier){
 				type1 = CREDIT;
 			}
 			valeur = strtok(NULL, DELIM);
-			val = atof(valeur);
-			op = nouvelle_operation(date, titre, type1, val, 0, 0, op);
+			val = atof(valeur);		
+			printf("\nPour l'opération \"%s\" du %s, choisissez parmi les catégories et sous catégories suivantes :\n",titre, date);
+			affiche_categories(0);
+			scanf("%d", &choixCat);
+			printf("\n");
+			affiche_sousCategories(choixCat-1,0);
+			scanf("%d", &choixSousCat);		
+			printf("\n");
+			op = nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1, op);
 		}
     } else {
 		printf("Je n'arrive pas à ouvrir le fichier.");
@@ -96,7 +105,6 @@ int main (void){
 	if (o != NULL){
 		afficheOperations(o);
 	}
-	gestion_categories();
 	return EXIT_SUCCESS;
 }
 
