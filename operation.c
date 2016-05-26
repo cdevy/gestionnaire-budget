@@ -3,6 +3,7 @@
 #include <string.h>
 #include "operation.h"
 #include "categorie.h"
+#include "categorie.c"
 
 
 #define DELIM ","
@@ -34,7 +35,6 @@ void retirer_operation(Operation *op, Operation *list) {
 }
 
 
-
 Operation* ParserOperation (const char * nomDuFichier){
 	FILE*  fichier  = NULL;
 	char*  date = NULL;
@@ -49,24 +49,19 @@ Operation* ParserOperation (const char * nomDuFichier){
 	fichier = fopen(nomDuFichier, "r");
 
     if (fichier != NULL){
-		if ((fgets (buff, BUFF_SIZE, fichier)) != NULL){
-			fgets (buff, BUFF_SIZE, fichier);
+		while(fgets (buff, BUFF_SIZE, fichier)!=NULL){
 			char * p = buff;
 			date = strtok(p, DELIM);
-			printf("%s \n",date);
 			titre = strtok(NULL, DELIM);
-			printf("%s \n",titre);
 			type = strtok(NULL, DELIM);
 			if (strcmp(type,"DEBIT")==0){
 				type1 = DEBIT;
 			}else{
 				type1 = CREDIT;
 			}
-			printf("%d \n",type1);
 			valeur = strtok(NULL, DELIM);
 			val = atof(valeur);
-			printf("%f \n",val);
-			op = nouvelle_operation(date, titre, type1, val,0 ,0 , NULL);
+			op = nouvelle_operation(date, titre, type1, val, 0, 0, op);
 		}
     } else {
 		printf("Je n'arrive pas à ouvrir le fichier.");
@@ -76,12 +71,33 @@ Operation* ParserOperation (const char * nomDuFichier){
 }
 
 
+void afficheOperations(Operation *list){
+	Operation *i;
+	for(i=list;i!=NULL;i=i->next) {
+		char* t;
+		switch (i-> type){
+			case DEBIT:
+				t="DEBIT"; 
+				break;
+			case CREDIT:
+				t="CREDIT"; 
+				break;
+			default:
+				break;
+		}
+		printf ("Date : %s Titre : %s Type : %s Valeur : %.2f Catégorie : %s Sous catégorie : %s\n",
+						i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
+	}
+}	
+
+
 int main (void){
-   Operation * o = ParserOperation("test.csv");
-   if (o != NULL){
-      printf ("Date : %s Titre : %s Type : %d Valeur : %f\n", o -> date, o -> titre, o-> type, o -> valeur);
-      free(o);
-   }
-   return EXIT_SUCCESS;
+	Operation * o = ParserOperation("test.csv");
+	if (o != NULL){
+		afficheOperations(o);
+	}
+	gestion_categories();
+	return EXIT_SUCCESS;
 }
+
 
