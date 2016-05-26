@@ -36,7 +36,7 @@ void affiche_sousCategories(Categorie cat, int affichage) {
 			if (affichage) {
 				printf("Les sous-categories de Habitation sont :\n");
 			}
-			printf("12.Loyer\n13.Gaz & Electricite\n14.Eau\n15.Telephonie & Internet\n16.Assurances\n6.Divers\n");     	    
+			printf("12.Loyer\n13.Gaz & Electricite\n14.Eau\n15.Telephonie & Internet\n16.Assurances\n29.Divers\n");     	    
 			break;
 		case TRANSPORTS:
 			if (affichage) {
