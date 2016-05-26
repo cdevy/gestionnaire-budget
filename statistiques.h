@@ -1,22 +1,25 @@
 #ifndef STATISTIQUES_H_INCLUDED
 #define STATISTIQUES_H_INCLUDED
 
-#include "compte.h" 
+#include "compte.h"
+#include "categorie.h"
 
 /*
 Permet de donner des statistiques mensuelles (avec graphiques)
 */
 
-typedef struct Type_graph = {BATON, ROND, TRAIT} Type_graph;
+typedef enum Type_graph {BATON, ROND, TRAIT} Type_graph;
 
-void statistiques(Compte* c);
+int menu_stats();
 
-void depenses_mensuelles(Compte* c, Type_graph type);
+void depenses(Compte* c);
 
-void rentrees_mensuelles(Compte* c, Type_graph type);
+void rentrees(Compte* c);
 
-void balance_mensuelle(Compte* c, Type_graph type);
+void balance(Compte* c);
 
-void depense_categorie(Compte* c, Categorie* cat, Type_graph type);
+double depenses_categorie(Compte* c, Categorie cat, int affichage);
+
+double rentrees_categorie(Compte* c, Categorie cat, int affichage);
 
 #endif

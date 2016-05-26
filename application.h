@@ -17,4 +17,6 @@ void gestion_informations(Comptes liste, int choix);
 
 void gestion_transactions(Comptes liste, int choix);
 
+void gestion_stats(Comptes liste, int choix);
+
 #endif
