@@ -19,11 +19,20 @@ struct Operation {
     Operation *next; //pointe vers la prochaine operation 
 };
 
+typedef enum
+{
+   DATE,
+   TITRE,
+   TYPEOPERATION,
+   VALEUR,
+   NB_TYPE
+}Operation_type;
+
 Operation* nouvelle_operation(char D[9], char t[32], Type_operation type, double valeur, Operation *suivant);
 
 void retirer_operation(Operation *op,Operation *list);
 
-static Operation* ParserOperation (const char * nomDuFichier);
+Operation* ParserOperation (const char * nomDuFichier);
 
-static void freeOperation (Operation ** p);
+void freeOperation (Operation ** p);
 #endif // OPERATION_H_INCLUDED

@@ -21,17 +21,6 @@ Operation* nouvelle_operation(char* D, char* t, Type_operation type, double vale
     return o;
 }
 
-typedef enum
-{
-   DATE,
-   TITRE,
-   TYPEOPERATION,
-   VALEUR,
- 
-   NB_TYPE
-}Operation_type;
-
-
 void retirer_operation(Operation *op, Operation *list) {
 	Operation *i, *tmp;
 	for(i=list;i!=NULL;i=i->next) {
