@@ -43,7 +43,7 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
 	    c->budgetsMax[i] = -1;
     	}
 	c-> liste_op = NULL;
-	c-> flux = NULL;
+	//c-> flux = NULL;
 	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
@@ -51,12 +51,12 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
             fclose(fichier);
 	}
 	/* Création du fichier de sauvegarde des flux s'il n'existe pas encore */
-	char nomFlux[20] = "flux ";
+	/*char nomFlux[20] = "flux ";
         nomFlux = strcat(strcat(nomFlux, noCpte),".txt");
 	if (fopen(nomFlux, "r") == NULL) {
             FILE* fichier2 = fopen(nomFlux, "w");
             fclose(fichier2);
-	}
+	}*/
     } else {
     	free(c);
     }
@@ -109,7 +109,7 @@ void free_compte(Compte* compte) {
 }
 
 void affiche_solde(Compte* compte) {
-    printf("Le solde du compte n° %ld (%s) est de : %f€\n", compte->numero, compte->nom, compte->solde);
+    printf("Le solde du compte n° %ld (%s) est de : %f€", compte->numero, compte->nom, compte->solde);
 }
 
 void informations(Compte* compte) {
@@ -118,7 +118,7 @@ void informations(Compte* compte) {
 
 void affiche_budgetsMax(Compte* compte) {
     char cat[NB_CAT][20] = {"Vie Quotidienne", "Loisirs", "Sante", "Habitation", "Transports", "Impots & Solidarite", "Professionel", "Epargne", "Divers"};
-    printf("Ci-dessous le budget maximal pour chaque catégorie du compte n° %ld (%s)\n", compte->numero, compte->nom);
+    printf("Ci-dessous le budget maximal pour chaque catégorie du compte n° %ld (%s) :\n", compte->numero, compte->nom);
     int i;
     for (i=0; i<NB_CAT; i++) {
 	if (compte->budgetsMax[i] != -1) {
@@ -217,7 +217,7 @@ void sauvegarder_liste(Comptes liste) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
 	while (liste2 != NULL) {
 	    sauvegarde(liste2);
-	    sauvegarde_flux(liste2);
+	    //sauvegarde_flux(liste2);
 	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€, [ ", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
 	    int i;
     	    for (i=0; i<NB_CAT; i++) {

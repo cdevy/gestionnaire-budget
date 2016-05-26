@@ -1,0 +1,7 @@
+Compte : 2222222222 (Livret A)
+Proprietaire : Jean Leblanc
+Banque : La Poste
+Agence : Paris
+
+Compte cloturé le Thu May 26 20:54:23 2016
+
