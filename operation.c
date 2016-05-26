@@ -33,25 +33,8 @@ void retirer_operation(Operation *op, Operation *list) {
 }
 
 
-char * str_dup (const char * str)
-{
-   char * dup = NULL;
-   if (str != NULL)
-   {
-      size_t size = strlen (str) + 1;
-      dup = malloc (size);
-      if (dup != NULL)
-      {
-         memcpy (dup, str, size);
-      }
-   }
-   return dup;
-}
-
 
 Operation* ParserOperation (const char * nomDuFichier){
-	int  categorie;
-	int  sousCategorie;
 	Operation* o = NULL;
 	FILE*  fichier  = NULL;
 	char*  date = NULL;
@@ -74,19 +57,21 @@ Operation* ParserOperation (const char * nomDuFichier){
 			
 			if (o != NULL){
 				  date = strtok(p, DELIM);
-				
+				  printf("%s \n",date);
 				  titre = strtok(NULL, DELIM);
-				
+				  printf("%s \n",titre);
 				  type = strtok(NULL, DELIM);
 				  if (strcmp(type,"DEBIT")==0){
 								type1 = DEBIT;
 							}else{
 								type1 = CREDIT;
 							}
-				
+				  printf("%s \n",type);
 				  valeur = strtok(NULL, DELIM);
-				  val = atof(valeur);
-				  op = nouvelle_operation(date, titre, type1, val, NULL);
+				  printf("%s \n",valeur);
+				  
+				  //val = atof(valeur);
+				  //op = nouvelle_operation(date, titre, type1, val, NULL);
          }
       }
       fclose (fichier);
