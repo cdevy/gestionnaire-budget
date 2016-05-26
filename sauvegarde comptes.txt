@@ -1,0 +1,5 @@
+Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max
+1234567890, Compte courant, Charlotte DEVY, SG, Paris, 450.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
+3412260100, Livret A, Alexis Bell, BNP, Metz, 1050.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
+1010301945, Compte epargne logement, Justine BASSELIN, Credit Agricole, Nancy, 25000.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
+1010301945, Compte epargne logement, Justine BASSELIN, Credit Agricole, Nancy, 25000.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
