@@ -1,6 +1,8 @@
 #ifndef COMPTE_H_INCLUDED
 #define COMPTE_H_INCLUDED
 
+#define NB_CAT 9
+
 /*
 Definit un compte
 Permet de sauvegarder les operations liees a un compte
@@ -16,7 +18,7 @@ struct Compte {
     char* agence;
     double solde;
     char* nomFichier;
-    double budgetsMax[9];
+    double budgetsMax[NB_CAT];
     Compte* next;
 };
 
@@ -37,6 +39,8 @@ void affiche_solde(Compte* compte);
 void affiche_operations(Compte* compte); /* à voir plus tard */
 
 void informations(Compte* compte);
+
+void affiche_budgetsMax(Compte* compte);
 
 void sauvegarde(Compte* compte);
 

@@ -36,7 +36,10 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
         c->nomFichier = (char*) malloc(45);
 	strcpy(c->nomFichier, c->nom);
 	c->nomFichier = strcat(strcat(strcat(c->nomFichier, " "), noCpte),".txt");
-	c->budgetsMax = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+	int i;
+    	for (i=0; i<NB_CAT; i++) {
+	    c->budgetsMax[i] = -1;
+    	}
 	/* Création du fichier de sauvegarde s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
@@ -93,6 +96,19 @@ void affiche_solde(Compte* compte) {
 
 void informations(Compte* compte) {
     printf("Numero : %ld\nNom du compte : %s\nProprietaire : %s\nBanque : %s\nAgence : %s\n", compte->numero, compte->nom, compte->proprietaire, compte->banque, compte->agence);
+}
+
+void affiche_budgetsMax(Compte* compte) {
+    char cat[NB_CAT][20] = {"Vie Quotidienne", "Loisirs", "Sante", "Habitation", "Transports", "Impots & Solidarite", "Professionel", "Epargne", "Divers"};
+    printf("Ci-dessous le budget maximal pour chaque catégorie du compte n° %ld (%s)\n", compte->numero, compte->nom);
+    int i;
+    for (i=0; i<NB_CAT; i++) {
+	if (compte->budgetsMax[i] != -1) {
+	    printf("%s : %f€\n", cat[i], compte->budgetsMax[i]);
+	} else {
+	    printf("%s : aucun\n", cat[i]);
+	}
+    }
 }
 
 void sauvegarde(Compte* compte) {
@@ -164,7 +180,7 @@ Comptes lire_liste(Comptes liste) {
     char banque[30];
     char agence[30];
     double solde;
-    double budgetsMax[9];
+    double budgetsMax[NB_CAT];
     Comptes liste2 = liste;
     FILE* fichier = fopen("sauvegarde comptes.txt", "r");
     if (fichier != NULL) {
@@ -172,9 +188,12 @@ Comptes lire_liste(Comptes liste) {
         fgets(premiere_ligne, TAILLE_LIGNE, fichier);
 	if (premiere_ligne != NULL) {
 	    while(!feof(fichier)) { 
-	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf€, [%lf %lf %lf %lf %lf %lf %lf %lf %lf]\n", &numero, nom, proprietaire, banque, agence, &solde, liste2->budgetsMax[0], liste2->budgetsMax[1], liste2->budgetsMax[2], liste2->budgetsMax[3], liste2->budgetsMax[4], liste2->budgetsMax[5], liste2->budgetsMax[6], liste2->budgetsMax[7], liste2->budgetsMax[8]);
+	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf€, [ %lf %lf %lf %lf %lf %lf %lf %lf %lf ]\n", &numero, nom, proprietaire, banque, agence, &solde, &budgetsMax[0], &budgetsMax[1], &budgetsMax[2], &budgetsMax[3], &budgetsMax[4], &budgetsMax[5], &budgetsMax[6], &budgetsMax[7], &budgetsMax[8]);
 	        Compte* c = nouveau_compte(nom, numero, proprietaire, banque, agence, solde);
-		c->budgetsMax = budgetsMax;
+		int i;
+    	        for (i=0; i<NB_CAT; i++) {
+	    	    c->budgetsMax[i] = budgetsMax[i];
+    	        }
 	        if (c != NULL) {
 		    liste2 = ajouter(liste2, c);
 	        } else {
@@ -193,8 +212,12 @@ Comptes sauvegarder_liste(Comptes liste) {
     if (fichier != NULL) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
 	while (liste2 != NULL) {
-	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
-	    fprintf(", [%f %f %f %f %f %f %f %f %f]\n", liste2->budgetsMax[0], liste2->budgetsMax[1], liste2->budgetsMax[2], liste2->budgetsMax[3], liste2->budgetsMax[4], liste2->budgetsMax[5], liste2->budgetsMax[6], liste2->budgetsMax[7], liste2->budgetsMax[8]);
+	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€, [ ", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
+	    int i;
+    	    for (i=0; i<NB_CAT; i++) {
+	    	fprintf(fichier, "%f ", liste2->budgetsMax[i]);
+    	    }
+	    fprintf(fichier, "]\n");
 	    liste2 = liste2->next;
 	}
         fclose(fichier);

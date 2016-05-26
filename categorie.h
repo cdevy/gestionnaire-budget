@@ -1,6 +1,8 @@
 #ifndef CATEGORIE_H_INCLUDED
 #define CATEGORIE_H_INCLUDED
 
+#include "compte.h"
+
 /*
 Definit les categories et sous-categories
 Permet de classer les operations et de fixer un budget par categorie

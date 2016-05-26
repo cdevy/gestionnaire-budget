@@ -24,7 +24,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    liste2 = gestion_comptes(liste, choix);
 	    break;
 	case 2:
-	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher le RIB d'un compte\n3. Afficher la liste des comptes\nTapez 0 pour revenir au menu precedent\n");
+	    printf("Entrez votre choix :\n1. Afficher le solde d'un compte\n2. Afficher le RIB d'un compte\n3. Afficher la liste des comptes\n4. Afficher le budget maximal par categorie\nTapez 0 pour revenir au menu precedent\n");
             scanf("%d", &choix);
 	    printf("\n");
 	    gestion_informations(liste, choix);
@@ -154,6 +154,20 @@ void gestion_informations(Comptes liste, int choix) {
 		printf("%ld  %s  %s\n", c2->numero, c2->nom, c2->proprietaire); 
                 c2 = c2->next;
    	    }
+	    break;
+	case 4:
+	    printf("Entrez le numero du compte (10 chiffres) :\n");
+            scanf("%ld", &numero);
+	    printf("\n");
+    	    if (taille_long(numero) == 10) {
+	        if (compte(liste, numero) != NULL) {
+		    affiche_budgetsMax(compte(liste, numero));
+	        } else {
+		    printf("Le compte n'existe pas");		
+	        }
+	    } else {
+		printf("Le numero de compte est invalide\n");
+	    }
 	    break;
 	default:
     	    printf("L'action choisie n'existe pas\n");
