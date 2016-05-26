@@ -2,6 +2,7 @@
 #define COMPTE_H_INCLUDED
 
 #include "operation.h"
+//#include "flux.h"
 #define NB_CAT 9
 
 /*
@@ -19,8 +20,9 @@ struct Compte {
     char* agence;
     double solde;
     char* nomFichier;
-    double budgetsMax[NB_CAT];
+    double budgetsCat[NB_CAT];
     Operation* liste_op;
+    //Flux* flux;
     Compte* next;
 };
 
@@ -38,8 +40,6 @@ void free_compte(Compte* c);
 
 void affiche_solde(Compte* compte);
 
-void affiche_operations(Compte* compte); /* à voir plus tard */
-
 void informations(Compte* compte);
 
 void affiche_budgetsMax(Compte* compte);
@@ -50,14 +50,10 @@ int depot(Compte* c, double valeur);
 
 int retrait(Compte* c, double valeur);
 
-int virement(Compte* debiteur, Compte* crediteur, double valeur);
-
 Compte* compte(Comptes liste, long numero);
-
-int nb_comptes(Comptes liste);
 
 Comptes lire_liste(Comptes liste);
 
-Comptes sauvegarder_liste(Comptes liste);
+void sauvegarder_liste(Comptes liste);
 
 #endif

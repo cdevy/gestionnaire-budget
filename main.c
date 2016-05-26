@@ -22,18 +22,20 @@ int main () {
     } while (fin == 0);
 
     /* Sauvegarde liste de comptes */
-    liste = sauvegarder_liste(liste);
+    sauvegarder_liste(liste);
 
     /* Tests fichier compte.c */
-    
+    /*
     Compte* c1 = nouveau_compte("Compte courant", 1338292124, "Charlotte DEVY", "Societe Generale", "St-Gratien", 100);
     if (c1 != NULL) {
 	affiche_solde(c1);
         informations(c1);
+        Operation* op = nouvelle_operation("26/05/16", "essai", DEBIT, -50, NULL);
+        c1->liste_op = op;
         sauvegarde(c1);
         printf("\n");
     }
-    liste = ajouter(liste, c1);/*
+    liste = ajouter(liste, c1);
     Compte* c2 = nouveau_compte("Livret A", 3300002124, "Charlotte DEVY", "Societe Generale", "St-Gratien", 20000);
     if (c2 != NULL) {
 	affiche_solde(c2);
@@ -64,12 +66,10 @@ int main () {
 	    liste = liste->next;
 	}
         fclose(fichier);
-    }*/
- 
-    c1->liste_op = nouvelle_operation("26/05/16", "essai", DEBIT, -50, NULL);;
+    }
     suppression(liste, c1);
-    //suppression(liste, c2);
-    
+    suppression(liste, c2);
+    */
 
     /* Tests fichier categorie.c */
     /*
