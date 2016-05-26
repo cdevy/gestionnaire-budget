@@ -4,7 +4,6 @@
 #include "categorie.h"
 
 #define NB_CAT 9
-#define NB_MAX_SSCAT 7
 
 void affiche_categories(int affichage) {
     if (affichage) {
@@ -258,5 +257,42 @@ char* nom_sousCat(SousCategorie sscat) {
     	    break;
     }
     return nom;
+}
+
+Categorie cat_numero(int num) {
+    Categorie cat = AUCUN;
+    switch (num) {
+	case 0:
+	    cat = QUOTIDIEN;
+	    break;
+	case 1:
+	    cat = LOISIRS;    	    
+	    break;
+	case 2:
+	    cat = SANTE;    	    
+	    break;
+	case 3: 
+	    cat = HABITATION;  	    
+	    break;
+	case 4: 
+	    cat = TRANSPORTS;  	    
+	    break;
+	case 5:
+	    cat = IMPOTS_SOLIDARITE;   	    
+	    break;
+	case 6: 
+	    cat = PROFESSIONNEL;  
+	    break;
+	case 7: 
+	    cat = EPARGNE;   	    
+	    break;
+	case 8:
+	    cat = DIVERS;    	    
+	    break;
+	default:
+    	    cat = AUCUN;
+    	    break;
+    }
+    return cat;
 }
 

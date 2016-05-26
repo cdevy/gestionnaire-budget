@@ -20,6 +20,6 @@ char* nom_cat(Categorie cat);
 
 char* nom_sousCat(SousCategorie sscat);
 
-//void affiche_operations(Categorie cat);
+Categorie cat_numero(int num);
 
 #endif

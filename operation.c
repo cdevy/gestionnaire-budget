@@ -3,7 +3,6 @@
 #include <string.h>
 #include "operation.h"
 #include "categorie.h"
-#include "categorie.c"
 
 
 #define DELIM ","
@@ -90,7 +89,7 @@ void afficheOperations(Operation *list){
 	}
 }	
 
-
+/*
 int main (void){
 	Operation * o = ParserOperation("test.csv");
 	if (o != NULL){
@@ -98,6 +97,6 @@ int main (void){
 	}
 	gestion_categories();
 	return EXIT_SUCCESS;
-}
+}*/
 
 
