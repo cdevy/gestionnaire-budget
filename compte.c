@@ -43,6 +43,7 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
 	    c->budgetsMax[i] = -1;
     	}
 	c-> liste_op = NULL;
+        c->next = NULL;
 	//c-> flux = NULL;
 	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
@@ -64,7 +65,6 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
 }
 
 Comptes ajouter(Comptes liste, Compte* c) { /* ajoute un compte a la fin de la liste */
-    c->next = NULL;
     if(liste == NULL) {
         return c;
     } else {
@@ -164,6 +164,20 @@ int retrait(Compte* c, double valeur) { /* valeur >=0 */
 	return 1;
     }
     return 0;
+}
+
+void gestion_op(Compte* c) {
+    if(c->liste_op != NULL) {
+        Operation* liste = c->liste_op;
+        while(liste->next != NULL) {
+	    if (liste->type == DEBIT) {
+		retrait(c, liste->valeur);
+	    } else {
+		depot(c, liste->valeur);
+	    }
+            liste = liste->next;
+        }
+    }
 }
 
 Compte* compte(Comptes liste, long numero) {
