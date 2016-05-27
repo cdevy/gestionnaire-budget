@@ -206,61 +206,6 @@ void gestion_informations(Comptes liste, int choix) {
     }
 }
 
-void gestion_transactions(Comptes liste, int choix) {
-    int action;
-    double valeur;
-    long numero;
-    switch (choix) {
-	case 0:
-	    action = menu();
-	    gestion_menu(liste, action);
-	    break;
-	case 1:
-    	    printf("Entrez le numero (10 chiffres) du compte a debiter (Tapez 0 pour revenir au menu precedent) : ");;
-       	    scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) != 10) {
-		printf("Le numero de compte est invalide\n");
-		break;
-	    }
-    	    printf("Entrez le montant a debiter :");
-	    vider_buffer();
-       	    scanf("%lf", &valeur);
-	    if (retrait(compte(liste, numero), valeur)) {
-		retrait(compte(liste, numero), valeur);
-		printf("Le retrait a bien ete effectue\n");
-	    } else {
-		printf("Le retrait n'a pas pu etre effectue\n");
-	    }  
-	    break;
-	case 2:
-    	    printf("Entrez le numero (10 chiffres) du compte a crediter (Tapez 0 pour revenir au menu precedent) : ");
-       	    scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) != 10) {
-		printf("Le numero de compte est invalide\n");
-		break;
-	    }
-    	    printf("Entrez le montant a crediter :");
-	    vider_buffer();
-       	    scanf("%lf", &valeur);
-	    if (depot(compte(liste, numero), valeur)) {
-		depot(compte(liste, numero), valeur);
-		printf("Le depot a bien ete effectue\n");
-	    } else {
-		printf("Le depot n'a pas pu etre effectue\n");
-	    }	    
-	    break;
-	default:
-    	    printf("L'action choisie n'existe pas");
-    	    break;
-    }
-}
-
 void gestion_stats(Comptes liste, int choix) {
     int action;
     long numero;

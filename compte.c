@@ -27,6 +27,7 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
         c->proprietaire = (char *) malloc((strlen(proprietaire) + 1)*sizeof(char));
         c->banque = (char *) malloc((strlen(banque) + 1)*sizeof(char));
         c->agence = (char *) malloc((strlen(agence) + 1)*sizeof(char));
+
         strcpy(c->nom, nom);
         c->numero = numero;
         strcpy(c->proprietaire, proprietaire);
@@ -44,20 +45,16 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
     	}
 	c-> liste_op = NULL;
         c->next = NULL;
-	//c-> flux = NULL;
+
 	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
             fprintf(fichier, "Compte : %ld (%s)\nProprietaire : %s\nBanque : %s\nAgence : %s\n", c->numero, c->nom, c->proprietaire, c->banque, c->agence);
+	    time_t t;
+    	    time(&t);
+	    fprintf(fichier, "\nCompte créé le %s\n", ctime(&t));
             fclose(fichier);
 	}
-	/* Création du fichier de sauvegarde des flux s'il n'existe pas encore */
-	/*char nomFlux[20] = "flux ";
-        nomFlux = strcat(strcat(nomFlux, noCpte),".txt");
-	if (fopen(nomFlux, "r") == NULL) {
-            FILE* fichier2 = fopen(nomFlux, "w");
-            fclose(fichier2);
-	}*/
     } else {
     	free(c);
     }
@@ -138,9 +135,9 @@ void sauvegarde(Compte* compte) {
 	while (op != NULL) {
 	    fprintf(fichier, "Date : %s, Titre : %s, ", op->date, op->titre);
 	    if (op->type == DEBIT) {
-		fprintf(fichier, "Type : Debit, "); 
+		fprintf(fichier, "Type : DEBIT, "); 
 	    } else {
-		fprintf(fichier, "Type : Credit, "); 
+		fprintf(fichier, "Type : CREDIT, "); 
 	    }
 	    fprintf(fichier, "Valeur : %f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
 	    op = op->next;
@@ -231,7 +228,6 @@ void sauvegarder_liste(Comptes liste) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
 	while (liste2 != NULL) {
 	    sauvegarde(liste2);
-	    //sauvegarde_flux(liste2);
 	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€, [ ", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
 	    int i;
     	    for (i=0; i<NB_CAT; i++) {

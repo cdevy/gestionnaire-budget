@@ -2,7 +2,6 @@
 #define COMPTE_H_INCLUDED
 
 #include "operation.h"
-//#include "flux.h"
 #define NB_CAT 9
 
 /*
@@ -22,7 +21,6 @@ struct Compte {
     char* nomFichier;
     double budgetsMax[NB_CAT];
     Operation* liste_op;
-    //Flux* flux;
     Compte* next;
 };
 
