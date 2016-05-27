@@ -20,7 +20,7 @@ int main()
 	printf("%s \n",a->date);
 	printf("%s \n",a->titre);
 	printf("%p \n\n",a->next);
-	
+	git 
 	
 	printf("operation fin :\n");
 	printf("%s \n",b->date);

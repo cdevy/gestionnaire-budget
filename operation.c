@@ -84,7 +84,7 @@ Operation* ParserOperation (const char * nomDuFichier){
 			affiche_sousCategories(choixCat-1,0);
 			scanf("%d", &choixSousCat);		
 			printf("\n");
-			op = ajouter_Operation_fin(op,nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1,NULL));
+			op = nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1,op);
 		}
     } else {
 		printf("Je n'arrive pas à ouvrir le fichier.");
