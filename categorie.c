@@ -117,7 +117,6 @@ void gestion_categories() {
 			affiche_sousCategories(DIVERS, 0);    	    
 			break;
 		default:
-    	    printf("La categorie choisie n'existe pas\n");
     	    break;
     }
 }
@@ -157,7 +156,6 @@ char* nom_cat(Categorie cat) {
 			nom = "Aucune";    	    
 			break;
 		default:
-    	    printf("La categorie n'existe pas\n");
     	    break;
     }
     return nom;
@@ -255,7 +253,6 @@ char* nom_sousCat(SousCategorie sscat) {
 			nom = "Aucune";    	    
 			break;
 		default:
-			printf("La categorie n'existe pas\n");
 			break;
     }
     return nom;

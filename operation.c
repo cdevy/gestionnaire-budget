@@ -99,13 +99,13 @@ void afficheOperations(Operation *list){
 	}
 }	
 
-/*
+
 int main (void){
 	Operation * o = ParserOperation("Ressources/test.csv");
 	if (o != NULL){
 		afficheOperations(o);
 	}
 	return EXIT_SUCCESS;
-}*/
+}
 
 
