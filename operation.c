@@ -6,6 +6,7 @@
 #include "categorie.c"
 
 
+
 #define DELIM ","
 #define BUFF_SIZE 1024
 
@@ -22,6 +23,19 @@ Operation* nouvelle_operation(char* D, char* t, Type_operation type, float valeu
     return o;
 }
 
+Operation* ajouter_Operation_fin(Operation* liste, Operation* op) { 
+    op -> next = NULL;
+    if(liste == NULL) {
+        return op;
+    } else {
+        Operation* temp = liste;
+        while(temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = op;
+        return liste;
+    }
+}
 
 void retirer_operation(Operation *op, Operation *list) {
 	Operation *i, *tmp;
@@ -70,7 +84,7 @@ Operation* ParserOperation (const char * nomDuFichier){
 			affiche_sousCategories(choixCat-1,0);
 			scanf("%d", &choixSousCat);		
 			printf("\n");
-			op = nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1, op);
+			op = ajouter_Operation_fin(op,nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1,NULL));
 		}
     } else {
 		printf("Je n'arrive pas à ouvrir le fichier.");
@@ -98,7 +112,6 @@ void afficheOperations(Operation *list){
 						i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
 	}
 }	
-
 
 int main (void){
 	Operation * o = ParserOperation("Ressources/test.csv");
