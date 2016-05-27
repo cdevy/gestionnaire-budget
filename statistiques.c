@@ -28,7 +28,7 @@ void depenses(Compte* c) {
     double depensesCat = 0;
     for (i=0; i<NB_CAT; i++) {
 	depensesCat = depenses_categorie(c, i, 0)*100/depenses;
-	printf("%f en %s\n", depenses, nom_cat(i));
+	printf("%f en %s\n", depensesCat, nom_cat(i));
     }
 }
 
@@ -46,7 +46,7 @@ void rentrees(Compte* c) {
     double rentreesCat = 0;
     for (i=0; i<NB_CAT; i++) {
 	rentreesCat = rentrees_categorie(c, i, 0)*100/rentrees;
-	printf("%f en %s\n", rentrees, nom_cat(i));
+	printf("%f en %s\n", rentreesCat, nom_cat(i));
     }
 }
 

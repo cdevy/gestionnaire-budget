@@ -50,6 +50,8 @@ int depot(Compte* c, double valeur);
 
 int retrait(Compte* c, double valeur);
 
+void gestion_op(Compte* c);
+
 Compte* compte(Comptes liste, long numero);
 
 Comptes lire_liste(Comptes liste);

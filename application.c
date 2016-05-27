@@ -8,7 +8,7 @@
 
 int menu() {
     int choix;
-    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Afficher la liste des comptes\n3. Consulter l'etat d'un compte\n4. Realiser une transaction\n5. Consulter les categories\n");
+    printf("Quelle action souhaitez-vous effectuer ?\n1. Creer/supprimer un compte\n2. Afficher la liste des comptes\n3. Consulter l'etat d'un compte\n4. Importer un releve de compte\n");
     scanf("%d", &choix);
     printf("\n");
     return choix;
@@ -39,13 +39,26 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    gestion_informations(liste, choix);
 	    break;
 	case 4:
-	    printf("Entrez le type de transaction :\n1.Retrait\n2.Depot\nTapez 0 pour revenir au menu precedent\n");
-            scanf("%d", &choix);
-	    printf("\n");
-	    gestion_transactions(liste, choix);
-	    break;
-	case 5:
-	    gestion_categories();
+    	    printf("Entrez le numero (10 chiffres) du compte (Tapez 0 pour revenir au menu precedent) : ");
+	    long numero;
+       	    scanf("%ld", &numero);
+	    if (numero == 0) {
+	        choix = menu();
+	        gestion_menu(liste, choix);
+	    } else if (taille_long(numero) != 10) {
+		printf("Le numero de compte est invalide\n");
+	    } else if (compte(liste, numero) != NULL) {
+	        char nomFichier[32];
+		printf("Entrez le nom du fichier a importer (.csv ou .txt) : ");
+		vider_buffer();
+       	        fgets(nomFichier, 32, stdin);
+	        traiter(nomFichier);
+		compte(liste, numero)->liste_op = ParserOperation (nomFichier);
+		gestion_op(compte(liste, numero));
+		printf("Le releve a bien ete importe au compte\n");
+	    } else {
+		printf("Le releve n'a pas pu etre importe au compte\n");		
+	    }
 	    break;
 	default:
 	    printf("L'action choisie n'existe pas\n");
@@ -314,7 +327,7 @@ void gestion_stats(Comptes liste, int choix) {
 		    printf("Choisissez parmi les categories suivantes :\n");
 		    affiche_categories(0);
             	    scanf("%d", &action);
-		    depenses_categorie(compte(liste, numero), action, 1);
+		    depenses_categorie(compte(liste, numero), action-1, 1);
 	        } else {
 		    printf("Le compte n'existe pas\n");		
 	        }
@@ -333,7 +346,7 @@ void gestion_stats(Comptes liste, int choix) {
 		    printf("Choisissez parmi les categories suivantes :\n");
 		    affiche_categories(0);
             	    scanf("%d", &action);
-		    rentrees_categorie(compte(liste, numero), action, 1);
+		    rentrees_categorie(compte(liste, numero), action-1, 1);
 	        } else {
 		    printf("Le compte n'existe pas\n");		
 	        }
