@@ -1,3 +1,7 @@
+Compte : 1234567890 (Compte courant)
+Proprietaire : Charlotte DEVY
+Banque : SG
+Agence : Paris
 
 Solde actuel : 450.000000€ mis à jour le Thu May 26 16:35:38 2016
 
