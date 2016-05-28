@@ -78,47 +78,43 @@ void afficheDepensesMoisCategorie(Operation* list, Categorie cat) {
     gnuplot_write_xy_csv("Données_depenses_mois_categorie.csv",x,y,32,NULL);
 }
 
-/*
+
 void afficheDepensesCategorie(Operation* list) {
 	gnuplot_ctrl *h;
-    double x[11];
-    double y[11];
+    double x[9];
+    double y[9];
     int i;
     Operation * op;
-    h = gnuplot_init() ;
-    for (i=0 ; i<11 ; i++) {
+    h = gnuplot_init();
+    for (i=0 ; i<9 ; i++) {
         x[i] = i;
         y[i] = 0;
-        printf("%d,%d\n",x[i],y[i]);
     }
-	for (i=0 ; i<8 ; i++) {
-		int cat = 1;
-		for (op = list;op!=NULL;op=op->next) {
-			if (op->categorie == cat-1 ) {
-				switch (op-> type){
-						case DEBIT:
-							y[cat] -= op->valeur;
-							break;
-						case CREDIT:
-							y[cat] += op->valeur; 
-							break;
-						default:
-							break;
-				}
+	for (op = list;op!=NULL;op=op->next) {
+		if (op->categorie != NULL && op->categorie<0 && op->categorie>8 ) {
+			printf("La valeur que vous avez rentré à Catégorie n'est pas bonne, veuillez tout recommencer.");
+			exit(0);
+		} else {
+			switch (op-> type){
+					case DEBIT:
+						y[op -> categorie] -= op->valeur;
+						break;
+					case CREDIT:
+						y[op -> categorie] += op->valeur; 
+						break;
+					default:
+						break;
 			}
 		}
-		cat++;
 	}
-	
-	
 	gnuplot_set_xlabel(h,"Vie Quotidienne  Loisirs  Sante  Habitation  Transports  Impots & Solidarite  Professionel  Epargne Divers");
-    gnuplot_setstyle(h,"points");
-    gnuplot_plot_xy(h, x, y, 11, "Graphe des dépenses du mois pour une catégorie") ;
-    sleep(30);
+    gnuplot_setstyle(h,"bares");
+    gnuplot_plot_xy(h, x, y, 9, "Graphe des dépenses du mois pour chaque catégorie") ;
+    sleep(5);
     gnuplot_close(h);
-    gnuplot_write_xy_csv("Données_depenses_mois_categorie.csv",x,y,11,NULL);
+    gnuplot_write_xy_csv("Données_depenses_categorie.csv",x,y,9,NULL);
 }
-*/
+
 int main(int argc, char **argv) {
 	Operation * o = ParserOperation("test.csv");
 	if (o != NULL){

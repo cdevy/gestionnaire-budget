@@ -43,6 +43,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    long numero;
        	    scanf("%ld", &numero);
 	    if (numero == 0) {
+	        printf("\n");
 	        choix = menu();
 	        gestion_menu(liste, choix);
 	    } else if (taille_long(numero) != 10) {
@@ -61,7 +62,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    }
 	    break;
 	default:
-	    printf("L'action choisie n'existe pas\n");
+	    printf("L'action choisie n'existe pas");
 	    break;
     }
     printf("\n");
@@ -126,8 +127,8 @@ Comptes gestion_comptes(Comptes liste, int choix) {
 		return gestion_menu(liste2, 1);
 	    } else if (taille_long(numero) != 10) {
 		printf("Le numero de compte est invalide\n");
-	    } else if (compte(liste, numero) != NULL) {
-		liste2 = suppression(liste, compte(liste, numero));
+	    } else if (compte(liste2, numero) != NULL) {
+		liste2 = suppression(liste2, compte(liste2, numero));
 		printf("Le compte a bien ete supprime\n");
 	    } else {
 		printf("Le compte n'a pas pu etre supprime\n");		
@@ -206,61 +207,6 @@ void gestion_informations(Comptes liste, int choix) {
     }
 }
 
-void gestion_transactions(Comptes liste, int choix) {
-    int action;
-    double valeur;
-    long numero;
-    switch (choix) {
-	case 0:
-	    action = menu();
-	    gestion_menu(liste, action);
-	    break;
-	case 1:
-    	    printf("Entrez le numero (10 chiffres) du compte a debiter (Tapez 0 pour revenir au menu precedent) : ");;
-       	    scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) != 10) {
-		printf("Le numero de compte est invalide\n");
-		break;
-	    }
-    	    printf("Entrez le montant a debiter :");
-	    vider_buffer();
-       	    scanf("%lf", &valeur);
-	    if (retrait(compte(liste, numero), valeur)) {
-		retrait(compte(liste, numero), valeur);
-		printf("Le retrait a bien ete effectue\n");
-	    } else {
-		printf("Le retrait n'a pas pu etre effectue\n");
-	    }  
-	    break;
-	case 2:
-    	    printf("Entrez le numero (10 chiffres) du compte a crediter (Tapez 0 pour revenir au menu precedent) : ");
-       	    scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) != 10) {
-		printf("Le numero de compte est invalide\n");
-		break;
-	    }
-    	    printf("Entrez le montant a crediter :");
-	    vider_buffer();
-       	    scanf("%lf", &valeur);
-	    if (depot(compte(liste, numero), valeur)) {
-		depot(compte(liste, numero), valeur);
-		printf("Le depot a bien ete effectue\n");
-	    } else {
-		printf("Le depot n'a pas pu etre effectue\n");
-	    }	    
-	    break;
-	default:
-    	    printf("L'action choisie n'existe pas");
-    	    break;
-    }
-}
-
 void gestion_stats(Comptes liste, int choix) {
     int action;
     long numero;
@@ -309,44 +255,6 @@ void gestion_stats(Comptes liste, int choix) {
 	    } else if (taille_long(numero) == 10) {
 	        if (compte(liste, numero) != NULL) {
 		    balance(compte(liste, numero));
-	        } else {
-		    printf("Le compte n'existe pas\n");		
-	        }
-	    } else {
-		printf("Le numero de compte est invalide\n");
-	    }
-	    break;
-	case 4:
-	    printf("Entrez le numero du compte (10 chiffres) (Tapez 0 pour revenir au menu precedent) : ");
-            scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) == 10) {
-	        if (compte(liste, numero) != NULL) {
-		    printf("Choisissez parmi les categories suivantes :\n");
-		    affiche_categories(0);
-            	    scanf("%d", &action);
-		    depenses_categorie(compte(liste, numero), action-1, 1);
-	        } else {
-		    printf("Le compte n'existe pas\n");		
-	        }
-	    } else {
-		printf("Le numero de compte est invalide\n");
-	    }
-	    break;
-	case 5:
-	    printf("Entrez le numero du compte (10 chiffres) (Tapez 0 pour revenir au menu precedent) : ");
-            scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) == 10) {
-	        if (compte(liste, numero) != NULL) {
-		    printf("Choisissez parmi les categories suivantes :\n");
-		    affiche_categories(0);
-            	    scanf("%d", &action);
-		    rentrees_categorie(compte(liste, numero), action-1, 1);
 	        } else {
 		    printf("Le compte n'existe pas\n");		
 	        }

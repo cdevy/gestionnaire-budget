@@ -18,8 +18,8 @@ void rentrees(Compte* c);
 
 void balance(Compte* c);
 
-double depenses_categorie(Compte* c, Categorie cat, int affichage);
+double depenses_categorie(Compte* c, Categorie cat);
 
-double rentrees_categorie(Compte* c, Categorie cat, int affichage);
+double rentrees_categorie(Compte* c, Categorie cat);
 
 #endif

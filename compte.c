@@ -27,6 +27,7 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
         c->proprietaire = (char *) malloc((strlen(proprietaire) + 1)*sizeof(char));
         c->banque = (char *) malloc((strlen(banque) + 1)*sizeof(char));
         c->agence = (char *) malloc((strlen(agence) + 1)*sizeof(char));
+
         strcpy(c->nom, nom);
         c->numero = numero;
         strcpy(c->proprietaire, proprietaire);
@@ -44,20 +45,16 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
     	}
 	c-> liste_op = NULL;
         c->next = NULL;
-	//c-> flux = NULL;
+
 	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
-            fprintf(fichier, "Compte : %ld (%s)\nProprietaire : %s\nBanque : %s\nAgence : %s\n", c->numero, c->nom, c->proprietaire, c->banque, c->agence);
+            fprintf(fichier, "Compte : %ld (%s)\nProprietaire : %s\nBanque : %s\nAgence : %s\nSolde initial : %.2f\n", c->numero, c->nom, c->proprietaire, c->banque, c->agence, c->solde);
+	    time_t t;
+    	    time(&t);
+	    fprintf(fichier, "\nCompte créé le %s\n", ctime(&t));
             fclose(fichier);
 	}
-	/* Création du fichier de sauvegarde des flux s'il n'existe pas encore */
-	/*char nomFlux[20] = "flux ";
-        nomFlux = strcat(strcat(nomFlux, noCpte),".txt");
-	if (fopen(nomFlux, "r") == NULL) {
-            FILE* fichier2 = fopen(nomFlux, "w");
-            fclose(fichier2);
-	}*/
     } else {
     	free(c);
     }
@@ -104,12 +101,11 @@ void free_compte(Compte* compte) {
     free(compte->banque);
     free(compte->agence);
     free(compte->nomFichier);
-    free(compte->next);
     free(compte);
 }
 
 void affiche_solde(Compte* compte) {
-    printf("Le solde du compte n° %ld (%s) est de : %f€", compte->numero, compte->nom, compte->solde);
+    printf("Le solde du compte n° %ld (%s) est de : %.2f€", compte->numero, compte->nom, compte->solde);
 }
 
 void informations(Compte* compte) {
@@ -122,30 +118,31 @@ void affiche_budgetsMax(Compte* compte) {
     int i;
     for (i=0; i<NB_CAT; i++) {
 	if (compte->budgetsMax[i] != -1) {
-	    printf("%s : %f€\n", cat[i], compte->budgetsMax[i]);
+	    printf("%s : %.2f€\n", cat[i], compte->budgetsMax[i]);
 	} else {
 	    printf("%s : aucun\n", cat[i]);
 	}
     }
 }
 
-void sauvegarde(Compte* compte) {
-    FILE* fichier = fopen(compte->nomFichier, "a+");
+void sauvegarde(Compte* c) {
+    FILE* fichier = fopen(c->nomFichier, "a+");
     if (fichier != NULL) {
 	time_t t;
     	time(&t);
-        Operation* op = compte->liste_op;
+        Operation* op = c->liste_op;
 	while (op != NULL) {
 	    fprintf(fichier, "Date : %s, Titre : %s, ", op->date, op->titre);
 	    if (op->type == DEBIT) {
-		fprintf(fichier, "Type : Debit, "); 
+		fprintf(fichier, "Type : DEBIT, "); 
 	    } else {
-		fprintf(fichier, "Type : Credit, "); 
+		fprintf(fichier, "Type : CREDIT, "); 
 	    }
-	    fprintf(fichier, "Valeur : %f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
+	    fprintf(fichier, "Valeur : %.2f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
 	    op = op->next;
 	}
-	fprintf(fichier, "\nSolde actuel : %f€ mis à jour le %s\n", compte->solde, ctime(&t));
+	c->liste_op = NULL;
+	fprintf(fichier, "\nSolde actuel : %.2f€ mis à jour le %s\n", c->solde, ctime(&t));
         fclose(fichier);
     }
 }
@@ -206,7 +203,7 @@ Comptes lire_liste(Comptes liste) {
         fgets(premiere_ligne, TAILLE_LIGNE, fichier);
 	if (premiere_ligne != NULL) {
 	    while(!feof(fichier)) { 
-	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf€, [ %lf %lf %lf %lf %lf %lf %lf %lf %lf ]\n", &numero, nom, proprietaire, banque, agence, &solde, &budgetsMax[0], &budgetsMax[1], &budgetsMax[2], &budgetsMax[3], &budgetsMax[4], &budgetsMax[5], &budgetsMax[6], &budgetsMax[7], &budgetsMax[8]);
+	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf, [ %lf %lf %lf %lf %lf %lf %lf %lf %lf ]\n", &numero, nom, proprietaire, banque, agence, &solde, &budgetsMax[0], &budgetsMax[1], &budgetsMax[2], &budgetsMax[3], &budgetsMax[4], &budgetsMax[5], &budgetsMax[6], &budgetsMax[7], &budgetsMax[8]);
 	        Compte* c = nouveau_compte(nom, numero, proprietaire, banque, agence, solde);
 		int i;
     	        for (i=0; i<NB_CAT; i++) {
@@ -225,20 +222,19 @@ Comptes lire_liste(Comptes liste) {
 }
 
 void sauvegarder_liste(Comptes liste) {
-    Comptes liste2 = liste;
+    Compte* c = liste;
     FILE* fichier = fopen("sauvegarde comptes.txt", "w+");
     if (fichier != NULL) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
-	while (liste2 != NULL) {
-	    sauvegarde(liste2);
-	    //sauvegarde_flux(liste2);
-	    fprintf(fichier, "%ld, %s, %s, %s, %s, %f€, [ ", liste2->numero, liste2->nom, liste2->proprietaire, liste2->banque, liste2->agence, liste2->solde);
+	while (c != NULL) {
+	    sauvegarde(c);
+	    fprintf(fichier, "%ld, %s, %s, %s, %s, %.2f, [ ", c->numero, c->nom, c->proprietaire, c->banque, c->agence, c->solde);
 	    int i;
     	    for (i=0; i<NB_CAT; i++) {
-	    	fprintf(fichier, "%f ", liste2->budgetsMax[i]);
+	    	fprintf(fichier, "%.2f ", c->budgetsMax[i]);
     	    }
 	    fprintf(fichier, "]\n");
-	    liste2 = liste2->next;
+	    c = c->next;
 	}
         fclose(fichier);
     }

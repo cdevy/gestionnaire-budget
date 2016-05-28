@@ -3,13 +3,9 @@
 #include <string.h>
 #include "operation.h"
 #include "categorie.h"
-#include "categorie.c"
-
-
 
 #define DELIM ","
 #define BUFF_SIZE 1024
-
 
 Operation* nouvelle_operation(char* D, char* t, Type_operation type, double valeur, Categorie cat, SousCategorie sousCat, Operation *suivant) {
     Operation *o = (Operation*) malloc(sizeof(Operation));
@@ -111,14 +107,14 @@ void afficheOperations(Operation *list){
 		printf ("Date : %s Titre : %s Type : %s Valeur : %.2f Catégorie : %s Sous catégorie : %s\n",
 						i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
 	}
-}	
-/*
+}
+
 int main (void){
 	Operation * o = ParserOperation("test.csv");
 	if (o != NULL){
 		afficheOperations(o);
 	}
 	return EXIT_SUCCESS;
+
 }
-*/
 
