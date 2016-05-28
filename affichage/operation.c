@@ -23,20 +23,6 @@ Operation* nouvelle_operation(char* D, char* t, Type_operation type, double vale
     return o;
 }
 
-Operation* ajouter_Operation_fin(Operation* liste, Operation* op) { 
-    op -> next = NULL;
-    if(liste == NULL) {
-        return op;
-    } else {
-        Operation* temp = liste;
-        while(temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = op;
-        return liste;
-    }
-}
-
 void retirer_operation(Operation *op, Operation *list) {
 	Operation *i, *tmp;
 	for(i=list;i!=NULL;i=i->next) {
@@ -77,11 +63,11 @@ Operation* ParserOperation (const char * nomDuFichier){
 			}
 			valeur = strtok(NULL, DELIM);
 			val = atof(valeur);		
-			printf("\nPour l'opération \"%s\" du %s, choisissez parmi les catégories et sous catégories suivantes :\n",titre, date);
-			affiche_categories(0);
+			printf("\nPour l'opération \"%s\" du %s, choisissez parmi les catégories et sous catégories suivantes :\n\n",titre, date);
+			affiche_categories();
 			scanf("%d", &choixCat);
 			printf("\n");
-			affiche_sousCategories(choixCat-1,0);
+			affiche_sousCategories(choixCat-1);
 			scanf("%d", &choixSousCat);		
 			printf("\n");
 			op = nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1,op);
@@ -111,14 +97,4 @@ void afficheOperations(Operation *list){
 		printf ("Date : %s Titre : %s Type : %s Valeur : %.2f Catégorie : %s Sous catégorie : %s\n",
 						i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
 	}
-}	
-/*
-int main (void){
-	Operation * o = ParserOperation("test.csv");
-	if (o != NULL){
-		afficheOperations(o);
-	}
-	return EXIT_SUCCESS;
 }
-*/
-

@@ -1,0 +1,10 @@
+Date,Titre,TypeOperation,valeur
+05/05/16,Loyer,DEBIT,390
+07/05/16,Achat de livre,DEBIT,7.99
+08/05/16,Achat de chocolat,DEBIT,15
+08/05/16,Courses,DEBIT,55.89
+10/05/16,Essence,DEBIT,40
+13/05/16,Achat de livre,DEBIT,7.99
+15/05/16,Virement,CREDIT,50
+17/05/16,Achat de croissant,DEBIT,0.7
+20/05/16,Bourse,CREDIT,470
