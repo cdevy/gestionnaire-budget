@@ -1,91 +1,17 @@
 Compte : 1234567890 (Compte courant)
 Proprietaire : Charlotte DEVY
 Banque : SG
-Agence : Paris
+Agence : Saint-Gratien
+Solde initial : 5650.00
 
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:35:38 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:37:12 2016
+Compte créé le Sat May 28 10:58:22 2016
 
 
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:37:32 2016
+Solde actuel : 5650.00€ mis à jour le Sat May 28 11:01:16 2016
 
 
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:37:53 2016
+Solde actuel : 5650.00€ mis à jour le Sat May 28 11:04:49 2016
 
 
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:47:50 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 16:52:35 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 19:53:04 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 19:53:32 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:24:19 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:30:18 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:31:42 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:33:00 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:37:46 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:37:58 2016
-
-
-Solde actuel : 450.000000€ mis à jour le Thu May 26 20:39:05 2016
-
-
-Solde actuel : 400.000000€ mis à jour le Thu May 26 20:44:55 2016
-
-
-Solde actuel : 360.000000€ mis à jour le Thu May 26 20:45:42 2016
-
-
-Solde actuel : 682.000000€ mis à jour le Thu May 26 20:52:35 2016
-
-
-Solde actuel : 1182.000000€ mis à jour le Thu May 26 20:58:21 2016
-
-
-Solde actuel : 1182.000000€ mis à jour le Thu May 26 20:59:12 2016
-
-
-Solde actuel : 1182.000000€ mis à jour le Thu May 26 20:59:30 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Thu May 26 21:01:01 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Thu May 26 22:40:24 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Thu May 26 22:45:25 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Thu May 26 22:47:14 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Fri May 27 10:44:35 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Fri May 27 11:59:14 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Fri May 27 12:19:02 2016
-
-
-Solde actuel : 1082.000000€ mis à jour le Fri May 27 16:04:29 2016
+Solde actuel : 5650.00€ mis à jour le Sat May 28 11:13:21 2016
 

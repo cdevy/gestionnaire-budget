@@ -43,6 +43,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    long numero;
        	    scanf("%ld", &numero);
 	    if (numero == 0) {
+	        printf("\n");
 	        choix = menu();
 	        gestion_menu(liste, choix);
 	    } else if (taille_long(numero) != 10) {
@@ -61,7 +62,7 @@ Comptes gestion_menu(Comptes liste, int action) {
 	    }
 	    break;
 	default:
-	    printf("L'action choisie n'existe pas\n");
+	    printf("L'action choisie n'existe pas");
 	    break;
     }
     printf("\n");
@@ -126,8 +127,8 @@ Comptes gestion_comptes(Comptes liste, int choix) {
 		return gestion_menu(liste2, 1);
 	    } else if (taille_long(numero) != 10) {
 		printf("Le numero de compte est invalide\n");
-	    } else if (compte(liste, numero) != NULL) {
-		liste2 = suppression(liste, compte(liste, numero));
+	    } else if (compte(liste2, numero) != NULL) {
+		liste2 = suppression(liste2, compte(liste2, numero));
 		printf("Le compte a bien ete supprime\n");
 	    } else {
 		printf("Le compte n'a pas pu etre supprime\n");		

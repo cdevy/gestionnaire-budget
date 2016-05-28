@@ -1,6 +1,4 @@
 Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max
-1234567890, Compte courant, Charlotte DEVY, SG, Paris, 1082.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
-3412260100, Livret A, Alexis BELL, BNP, Metz, 1050.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
-1010301945, Compte epargne logement, Justine BASSELIN, Credit Agricole, Nancy, 25000.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
-9999012345, Livret jeune, Guillaume GARCIA, LCL, Saint-Leu-la-Foret, 3500.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
-2419012345, Compte courant, Georges THOMAS, Credit Lyonnais, Lyon, 890.000000€, [ -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 -1.000000 ]
+1234567890, Compte courant, Charlotte DEVY, SG, Saint-Gratien, 5650.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
+3333451678, Compte epargne logement, Justine BASSELIN, Credit Agricole, Nancy, 25000.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
+9996134103, Livret A, Guillaume GARCIA, BNP Paribas, Saint-Leu-la-Foret, 7690.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
