@@ -262,44 +262,6 @@ void gestion_stats(Comptes liste, int choix) {
 		printf("Le numero de compte est invalide\n");
 	    }
 	    break;
-	case 4:
-	    printf("Entrez le numero du compte (10 chiffres) (Tapez 0 pour revenir au menu precedent) : ");
-            scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) == 10) {
-	        if (compte(liste, numero) != NULL) {
-		    printf("Choisissez parmi les categories suivantes :\n");
-		    affiche_categories(0);
-            	    scanf("%d", &action);
-		    depenses_categorie(compte(liste, numero), action-1, 1);
-	        } else {
-		    printf("Le compte n'existe pas\n");		
-	        }
-	    } else {
-		printf("Le numero de compte est invalide\n");
-	    }
-	    break;
-	case 5:
-	    printf("Entrez le numero du compte (10 chiffres) (Tapez 0 pour revenir au menu precedent) : ");
-            scanf("%ld", &numero);
-	    if (numero == 0) {
-		gestion_menu(liste, 3);
-		break;
-	    } else if (taille_long(numero) == 10) {
-	        if (compte(liste, numero) != NULL) {
-		    printf("Choisissez parmi les categories suivantes :\n");
-		    affiche_categories(0);
-            	    scanf("%d", &action);
-		    rentrees_categorie(compte(liste, numero), action-1, 1);
-	        } else {
-		    printf("Le compte n'existe pas\n");		
-	        }
-	    } else {
-		printf("Le numero de compte est invalide\n");
-	    }
-	    break;
 	default:
     	    printf("L'action choisie n'existe pas");
     	    break;
