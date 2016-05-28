@@ -38,7 +38,7 @@ void afficheDepensesMois(Operation* list) {
     gnuplot_plot_xy(h, x, y, 31, "Graphe des dépenses du mois") ;
     sleep(10);
     gnuplot_close(h);
-    gnuplot_write_xy_csv("Données_depenses_mois.csv",x,y,32,NULL);
+    gnuplot_write_xy_csv("Donnees_depenses_mois.csv",x,y,32,NULL);
 }
 
 void afficheDepensesMoisCategorie(Operation* list, Categorie cat) {
@@ -73,9 +73,9 @@ void afficheDepensesMoisCategorie(Operation* list, Categorie cat) {
 	}
     gnuplot_setstyle(h,"linespoints");
     gnuplot_plot_xy(h, x, y, 31, "Graphe des dépenses du mois pour une catégorie") ;
-    sleep(5);
+    sleep(10);
     gnuplot_close(h);
-    gnuplot_write_xy_csv("Données_depenses_mois_categorie.csv",x,y,32,NULL);
+    gnuplot_write_xy_csv("Donnees_depenses_mois_categorie.csv",x,y,32,NULL);
 }
 
 
@@ -108,20 +108,18 @@ void afficheDepensesCategorie(Operation* list) {
 		}
 	}
 	gnuplot_set_xlabel(h,"Vie Quotidienne  Loisirs  Sante  Habitation  Transports  Impots & Solidarite  Professionel  Epargne Divers");
-    gnuplot_setstyle(h,"bares");
+    gnuplot_setstyle(h,"boxes");
     gnuplot_plot_xy(h, x, y, 9, "Graphe des dépenses du mois pour chaque catégorie") ;
-    sleep(5);
+    sleep(10);
     gnuplot_close(h);
-    gnuplot_write_xy_csv("Données_depenses_categorie.csv",x,y,9,NULL);
+    gnuplot_write_xy_csv("Donnees_depenses_categorie.csv",x,y,9,NULL);
 }
 
-int main(int argc, char **argv) {
+/*int main(int argc, char **argv) {
 	Operation * o = ParserOperation("test.csv");
 	if (o != NULL){
 		afficheOperations(o);
 	}
-	double r = depensesMois(o);
-	printf("\nLa balance est de :%.2f\n", r);
 	afficheDepensesCategorie(o);
 	return EXIT_SUCCESS;
-}
+}*/
