@@ -52,7 +52,7 @@ void gestion_op(Compte* c);
 
 Compte* compte(Comptes liste, long numero);
 
-Comptes lire_liste(Comptes liste);
+Comptes lire_liste();
 
 void sauvegarder_liste(Comptes liste);
 

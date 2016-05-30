@@ -11,6 +11,6 @@ long taille_long(long l);
 
 void vider_buffer();
 
-void traiter(char* chaine);
+void traiter(char* chaine, int choix);
 
 #endif

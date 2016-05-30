@@ -7,6 +7,7 @@
 #define DELIM ","
 #define BUFF_SIZE 1024
 
+
 Operation* nouvelle_operation(char* D, char* t, Type_operation type, double valeur, Categorie cat, SousCategorie sousCat, Operation *suivant) {
     Operation *o = (Operation*) malloc(sizeof(Operation));
     strcpy(o -> date, D);
@@ -19,23 +20,9 @@ Operation* nouvelle_operation(char* D, char* t, Type_operation type, double vale
     return o;
 }
 
-Operation* ajouter_Operation_fin(Operation* liste, Operation* op) { 
-    op -> next = NULL;
-    if(liste == NULL) {
-        return op;
-    } else {
-        Operation* temp = liste;
-        while(temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = op;
-        return liste;
-    }
-}
-
 void retirer_operation(Operation *op, Operation *list) {
 	Operation *i, *tmp;
-	for(i=list;i!=NULL;i=i->next) {
+	for(i=list; i!=NULL; i=i->next) {
 		if((i->next)==op){
 			tmp = i->next;
 			i->next = i->next->next;
@@ -45,7 +32,7 @@ void retirer_operation(Operation *op, Operation *list) {
 }
 
 
-Operation* ParserOperation (const char * nomDuFichier){
+Operation* ParserOperation(const char * nomDuFichier) {
 	FILE*  fichier  = NULL;
 	char*  date = NULL;
 	char*  titre = NULL;
@@ -61,7 +48,7 @@ Operation* ParserOperation (const char * nomDuFichier){
 	fichier = fopen(nomDuFichier, "r");
 	fgets (buff, BUFF_SIZE, fichier);
     if (fichier != NULL){
-		while(fgets (buff, BUFF_SIZE, fichier)!=NULL){
+		while(fgets(buff, BUFF_SIZE, fichier) != NULL){
 			char * p = buff;
 			date = strtok(p, DELIM);
 			titre = strtok(NULL, DELIM);
@@ -73,26 +60,26 @@ Operation* ParserOperation (const char * nomDuFichier){
 			}
 			valeur = strtok(NULL, DELIM);
 			val = atof(valeur);		
-			printf("\nPour l'opération \"%s\" du %s, choisissez parmi les catégories et sous catégories suivantes :\n",titre, date);
-			affiche_categories(0);
+			printf("\nPour l'opération \"%s\" du %s, choisissez parmi les catégories et sous catégories suivantes :\n\n",titre, date);
+			affiche_categories();
 			scanf("%d", &choixCat);
 			printf("\n");
-			affiche_sousCategories(choixCat-1,0);
+			affiche_sousCategories(choixCat-1);
 			scanf("%d", &choixSousCat);		
 			printf("\n");
 			op = nouvelle_operation(date, titre, type1, val, choixCat-1, choixSousCat-1,op);
 		}
     } else {
-		printf("Je n'arrive pas à ouvrir le fichier.");
+		printf("Le fichier ne peut pas etre ouvert.");
 	}
     fclose (fichier);
 	return op;
 }
 
 
-void afficheOperations(Operation *list){
+void afficheOperations(Operation *list) {
 	Operation *i;
-	for(i=list;i!=NULL;i=i->next) {
+	for(i=list; i!=NULL; i=i->next) {
 		char* t;
 		switch (i-> type){
 			case DEBIT:
@@ -104,17 +91,6 @@ void afficheOperations(Operation *list){
 			default:
 				break;
 		}
-		printf ("Date : %s Titre : %s Type : %s Valeur : %.2f Catégorie : %s Sous catégorie : %s\n",
-						i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
+		printf ("Date : %s Titre : %s Type : %s Valeur : %.2f Catégorie : %s Sous catégorie : %s\n", i->date,i->titre,t,i->valeur,nom_cat(i->categorie),nom_sousCat(i->sousCategorie));
 	}
 }
-
-int main (void){
-	Operation * o = ParserOperation("test.csv");
-	if (o != NULL){
-		afficheOperations(o);
-	}
-	return EXIT_SUCCESS;
-
-}
-

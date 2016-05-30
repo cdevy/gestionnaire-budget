@@ -1,0 +1,29 @@
+Compte : 9999478301 (Compte courant)
+Proprietaire : Charlene LACOURBAS
+Banque : BNP Paribas
+Agence : Sarcelles
+Solde initial : 2670.00
+
+Compte créé le Mon May 30 16:48:17 2016
+
+
+Solde actuel : 2670.00€ mis à jour le Mon May 30 16:48:52 2016
+
+Date : 20/05/16, Titre : Bourse, Type : CREDIT, Valeur : 470.00€, Categorie : Divers, Sous-categorie : (null)
+Date : 17/05/16, Titre : Achat de croissant, Type : DEBIT, Valeur : 0.70€, Categorie : Vie Quotidienne, Sous-categorie : Alimentation
+Date : 15/05/16, Titre : Virement, Type : CREDIT, Valeur : 50.00€, Categorie : Vie Quotidienne, Sous-categorie : Banque
+Date : 13/05/16, Titre : Achat de livre, Type : DEBIT, Valeur : 7.99€, Categorie : Loisirs, Sous-categorie : Presse
+Date : 10/05/16, Titre : Essence, Type : DEBIT, Valeur : 40.00€, Categorie : Transports, Sous-categorie : Carburant
+Date : 08/05/16, Titre : Courses, Type : DEBIT, Valeur : 55.89€, Categorie : Vie Quotidienne, Sous-categorie : Alimentation
+Date : 08/05/16, Titre : Achat de chocolat, Type : DEBIT, Valeur : 15.00€, Categorie : Vie Quotidienne, Sous-categorie : Alimentation
+Date : 07/05/16, Titre : Achat de livre, Type : DEBIT, Valeur : 7.99€, Categorie : Loisirs, Sous-categorie : Presse
+Date : 05/05/16, Titre : Loyer, Type : DEBIT, Valeur : 390.00€, Categorie : Habitation, Sous-categorie : Loyer
+
+Solde actuel : 3062.43€ mis à jour le Mon May 30 16:54:23 2016
+
+
+Solde actuel : 3062.43€ mis à jour le Mon May 30 16:55:36 2016
+
+
+Solde actuel : 3062.43€ mis à jour le Mon May 30 16:55:46 2016
+

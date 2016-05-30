@@ -23,10 +23,11 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
 	    return NULL;
 	}
 	/* Allocations mémoires des attributs */
-        c->nom = (char *) malloc((strlen(nom) + 1)*sizeof(char));
+        c->nom = (char*) malloc((strlen(nom) + 1)*sizeof(char));
         c->proprietaire = (char *) malloc((strlen(proprietaire) + 1)*sizeof(char));
-        c->banque = (char *) malloc((strlen(banque) + 1)*sizeof(char));
-        c->agence = (char *) malloc((strlen(agence) + 1)*sizeof(char));
+        c->banque = (char*) malloc((strlen(banque) + 1)*sizeof(char));
+        c->agence = (char*) malloc((strlen(agence) + 1)*sizeof(char));
+	c->nomFichier = (char*) malloc(50*sizeof(char));
 
         strcpy(c->nom, nom);
         c->numero = numero;
@@ -36,16 +37,15 @@ Compte* nouveau_compte(char* nom, long numero, char* proprietaire, char* banque,
         c->solde = solde;
 	char noCpte[10] = "";
 	sprintf(noCpte, "%ld", c->numero);
-        c->nomFichier = (char*) malloc(45);
-	strcpy(c->nomFichier, c->nom);
-	c->nomFichier = strcat(strcat(strcat(c->nomFichier, " "), noCpte),".txt");
+	strcpy(c->nomFichier, nom);
+	strcat(strcat(strcat(c->nomFichier, "_"), noCpte),".txt");
+	traiter(c->nomFichier, 1);
 	int i;
     	for (i=0; i<NB_CAT; i++) {
 	    c->budgetsMax[i] = -1;
     	}
 	c-> liste_op = NULL;
         c->next = NULL;
-
 	/* Création du fichier de sauvegarde des operations s'il n'existe pas encore */
 	if (fopen(c->nomFichier, "r") == NULL) {
             FILE* fichier = fopen(c->nomFichier, "w");
@@ -141,7 +141,6 @@ void sauvegarde(Compte* c) {
 	    fprintf(fichier, "Valeur : %.2f€, Categorie : %s, Sous-categorie : %s\n", op->valeur, nom_cat(op->categorie), nom_sousCat(op->sousCategorie)); 
 	    op = op->next;
 	}
-	c->liste_op = NULL;
 	fprintf(fichier, "\nSolde actuel : %.2f€ mis à jour le %s\n", c->solde, ctime(&t));
         fclose(fichier);
     }
@@ -164,17 +163,19 @@ int retrait(Compte* c, double valeur) { /* valeur >=0 */
 }
 
 void gestion_op(Compte* c) {
-    if(c->liste_op != NULL) {
-        Operation* liste = c->liste_op;
-        while(liste->next != NULL) {
-	    if (liste->type == DEBIT) {
-		retrait(c, liste->valeur);
-	    } else {
-		depot(c, liste->valeur);
-	    }
-            liste = liste->next;
-        }
-    }
+    if (c != NULL) {
+    	if(c->liste_op != NULL) {
+        	Operation* liste = c->liste_op;
+        	while(liste->next != NULL) {
+		    if (liste->type == DEBIT) {
+			retrait(c, liste->valeur);
+		    } else {
+			depot(c, liste->valeur);
+		    }
+        	    liste = liste->next;
+        	}
+	}
+    }	
 }
 
 Compte* compte(Comptes liste, long numero) {
@@ -188,7 +189,7 @@ Compte* compte(Comptes liste, long numero) {
     return NULL;
 }
 
-Comptes lire_liste(Comptes liste) {
+Comptes lire_liste() {
     long numero;
     char nom[30];
     char proprietaire[30]; 
@@ -196,8 +197,8 @@ Comptes lire_liste(Comptes liste) {
     char agence[30];
     double solde;
     double budgetsMax[NB_CAT];
-    Comptes liste2 = liste;
-    FILE* fichier = fopen("sauvegarde comptes.txt", "r");
+    Comptes liste = NULL;
+    FILE* fichier = fopen("sauvegarde_comptes.txt", "r");
     if (fichier != NULL) {
 	char premiere_ligne[TAILLE_LIGNE];
         fgets(premiere_ligne, TAILLE_LIGNE, fichier);
@@ -205,12 +206,12 @@ Comptes lire_liste(Comptes liste) {
 	    while(!feof(fichier)) { 
 	        fscanf(fichier, "%ld, %[^','], %[^','], %[^','], %[^','], %lf, [ %lf %lf %lf %lf %lf %lf %lf %lf %lf ]\n", &numero, nom, proprietaire, banque, agence, &solde, &budgetsMax[0], &budgetsMax[1], &budgetsMax[2], &budgetsMax[3], &budgetsMax[4], &budgetsMax[5], &budgetsMax[6], &budgetsMax[7], &budgetsMax[8]);
 	        Compte* c = nouveau_compte(nom, numero, proprietaire, banque, agence, solde);
-		int i;
-    	        for (i=0; i<NB_CAT; i++) {
-	    	    c->budgetsMax[i] = budgetsMax[i];
-    	        }
 	        if (c != NULL) {
-		    liste2 = ajouter(liste2, c);
+		    int i;
+    	            for (i=0; i<NB_CAT; i++) {
+	    	        c->budgetsMax[i] = budgetsMax[i];
+    	            }
+		    liste = ajouter(liste, c);
 	        } else {
 		    printf("Erreur : le compte n'a pas pu etre ajoute");
 	        }
@@ -218,12 +219,12 @@ Comptes lire_liste(Comptes liste) {
 	}
         fclose(fichier);
     }
-    return liste2;
+    return liste;
 }
 
 void sauvegarder_liste(Comptes liste) {
     Compte* c = liste;
-    FILE* fichier = fopen("sauvegarde comptes.txt", "w+");
+    FILE* fichier = fopen("sauvegarde_comptes.txt", "w+");
     if (fichier != NULL) {
 	fprintf(fichier, "Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max\n");
 	while (c != NULL) {

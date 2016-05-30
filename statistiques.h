@@ -3,12 +3,11 @@
 
 #include "compte.h"
 #include "categorie.h"
+#include "operation.h"
 
 /*
-Permet de donner des statistiques mensuelles (avec graphiques)
+Permet de donner des statistiques journalieres et mensuelles
 */
-
-typedef enum Type_graph {BATON, ROND, TRAIT} Type_graph;
 
 int menu_stats();
 
@@ -21,5 +20,13 @@ void balance(Compte* c);
 double depenses_categorie(Compte* c, Categorie cat);
 
 double rentrees_categorie(Compte* c, Categorie cat);
+
+double balanceJour(Operation* list, int jour);
+
+double balanceJourCategorie(Operation* list, int jour, Categorie cat);
+
+double balanceMois(Operation* list);
+	
+double balanceMoisCategorie(Operation* list, Categorie cat);
 
 #endif

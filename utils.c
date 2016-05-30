@@ -19,9 +19,17 @@ void vider_buffer() {
     while ((c = getchar ()) != '\n' && c != EOF);
 }
 
-void traiter(char* chaine) {
-    char* p = strchr(chaine, '\n');
-    if (p) {
-	*p = 0;
+void traiter(char* chaine, int choix) { /* 0 : remplace \n ; 1 : remplace espace */
+    char* p = NULL;
+    if (!choix) {
+	p = strchr(chaine, '\n');
+    	if (p) {
+	    *p = 0;
+    	}
+    } else {
+	p = strchr(chaine, ' ');
+    	if (p) {
+	    *p = '_';
+    	}
     }
 }

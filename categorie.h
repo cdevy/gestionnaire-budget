@@ -10,9 +10,9 @@ typedef enum SousCategorie {ALIMENTATION, HABILLEMENT, BANQUE, CULTURE, PRESSE, 
 
 void gestion_categories();
 
-void affiche_categories(int affichage);
+void affiche_categories();
 
-void affiche_sousCategories(Categorie cat, int affichage);
+void affiche_sousCategories(Categorie cat);
 
 char* nom_cat(Categorie cat);
 

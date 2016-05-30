@@ -4,56 +4,32 @@
 #include "categorie.h"
 #define NB_CAT 9
 
-void affiche_categories(int affichage) {
-    if (affichage) {
-		printf("Les categories sont :\n");
-    }
+void affiche_categories() {
     printf("1.Vie Quotidienne\n2.Loisirs\n3.Sante\n4.Habitation\n5.Transports\n6.Impots & Solidarite\n7.Professionel\n8.Epargne\n9.Divers\n");
 }
 
 
-void affiche_sousCategories(Categorie cat, int affichage) {
+void affiche_sousCategories(Categorie cat) {
     switch (cat) {
 		case QUOTIDIEN:
-			if (affichage) {
-				printf("Les sous-categories de Vie Quotidienne sont :\n");
-			}
 			printf("1.Alimentation\n2.Habillement\n3.Banque\n29.Divers\n");
 			break;
 		case LOISIRS:
-			if (affichage) {
-				printf("Les sous-categories de Loisirs sont :\n");
-			}
 			printf("4.Culture\n5.Presse\n6.Restaurants & Sorties\n7.Week-ends & Vacances\n8.Cadeaux\n29.Divers\n");    	    
 			break;
 		case SANTE:
-			if (affichage) {
-				printf("Les sous-categories de Sante sont :\n");
-			}
 			printf("9.Medecins\n10.Pharmacie\n11.Securite sociale & Mutuelles\n29.Divers\n");    	    
 			break;
 		case HABITATION:
-			if (affichage) {
-				printf("Les sous-categories de Habitation sont :\n");
-			}
 			printf("12.Loyer\n13.Gaz & Electricite\n14.Eau\n15.Telephonie & Internet\n16.Assurances\n29.Divers\n");     	    
 			break;
 		case TRANSPORTS:
-			if (affichage) {
-				printf("Les sous-categories de Habitation sont :\n");
-			}
 			printf("17.Abonnements\n18.Billets\n19.Parking\n20.Carburant\n21.Entretien\n16.Assurances\n29.Divers\n");    	    
 			break;
 		case IMPOTS_SOLIDARITE:
-			if (affichage) {
-				printf("Les sous-categories de Impots & Solidarite sont :\n");
-			}
 			printf("22.Impot sur le revenu\n23.Taxes foncieres\n24.Taxe d'habitation\n25.Dons\n29.Divers\n");    	    
 			break;
 		case PROFESSIONNEL:
-			if (affichage) {
-				printf("Les sous-categories de Professionnel sont :\n");
-			}
 			printf("26.Materiel\n27.Repas\n28.Voyages\n29.Divers\n");   
 			break;
 		case EPARGNE:
@@ -71,50 +47,50 @@ void affiche_sousCategories(Categorie cat, int affichage) {
 void gestion_categories() {
     int choix;
     printf("Choisissez parmi les categories suivantes :\n");
-    affiche_categories(0);
+    affiche_categories();
     scanf("%d", &choix);
     printf("\n");
     switch (choix) {
 		case 1:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(QUOTIDIEN, 0);
+			affiche_sousCategories(QUOTIDIEN);
 			scanf("%d", &choix);
 			break;
 		case 2:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(LOISIRS, 0);   
+			affiche_sousCategories(LOISIRS);   
 			scanf("%d", &choix);	    
 			break;
 		case 3:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(SANTE, 0);  
+			affiche_sousCategories(SANTE);  
 			scanf("%d", &choix);  	    
 			break;
 		case 4:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(HABITATION, 0); 
+			affiche_sousCategories(HABITATION); 
 			scanf("%d", &choix);   	    
 			break;
 		case 5:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(TRANSPORTS, 0); 
+			affiche_sousCategories(TRANSPORTS); 
 			scanf("%d", &choix);   	    
 			break;
 		case 6:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(IMPOTS_SOLIDARITE, 0);   
+			affiche_sousCategories(IMPOTS_SOLIDARITE);   
 			scanf("%d", &choix); 	    
 			break;
 		case 7:
 			printf("Choisissez parmi les sous-categories suivantes :\n");
-			affiche_sousCategories(PROFESSIONNEL, 0);   
+			affiche_sousCategories(PROFESSIONNEL);   
 			scanf("%d", &choix);	    
 			break;
 		case 8:
-			affiche_sousCategories(EPARGNE, 0);
+			affiche_sousCategories(EPARGNE);
 			break;
 		case 9:
-			affiche_sousCategories(DIVERS, 0);    	    
+			affiche_sousCategories(DIVERS);    	    
 			break;
 		default:
     	    break;
