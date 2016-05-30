@@ -1,5 +1,6 @@
 Numero, Nom, Proprietaire, Banque, Agence, Solde, Budgets max
-1234567890, Compte courant, Charlotte DEVY, SG, Saint-Gratien, 6149.30, [ 200.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
+1234567890, Compte courant, Charlotte DEVY, SG, Saint-Gratien, 7041.03, [ 200.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
 2341689000, Livret A, Justine BASSELIN, Credit Agricole, Nancy, 25000.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
 2222222222, Compte epargne logement, Guillaume GARCIA, LCL, Saint-Leu-la-Foret, 10500.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
 9999478301, Compte courant, Charlene LACOURBAS, BNP Paribas, Sarcelles, 3062.43, [ -1.00 150.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]
+3333339810, Compte courant, Max Legrand, SG, Paris, 269.00, [ -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 ]

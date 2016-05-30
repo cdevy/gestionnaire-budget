@@ -1,4 +1,9 @@
-Compilation du projet :
+Ouvrez l'invite de commande
 
+Compilation du projet :
+Tapez la commande make
 
 Exécution du projet :
+Tapez la commande ./projet
+
+L'application se lance, vous pouvez maintenant gérer votre budget.

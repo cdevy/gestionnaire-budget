@@ -9,7 +9,7 @@
 
 int menu() {
     int choix;
-    printf("Quelle action souhaitez-vous effectuer ?\n1. Gestion des comptes\n2. Afficher la liste des comptes\n3. Consulter l'etat d'un compte\n4. Importer un releve de compte\n5. Afficher les statistiques liees a un compte\n");
+    printf("Quelle action souhaitez-vous effectuer ?\n1. Créer ou supprimer un compte\n2. Afficher la liste des comptes\n3. Consulter l'etat d'un compte\n4. Importer un releve de compte\n5. Afficher les statistiques liees a un compte\n");
     scanf("%d", &choix);
     printf("\n");
     return choix;
