@@ -1,9 +1,9 @@
 # Gestion de budget
 
-Auteurs  
+Auteurs    
 
-  Justine BASSELIN
-  Charlotte DEVY
+    Justine BASSELIN
+    Charlotte DEVY
 
 ## Présentation du projet  
 
