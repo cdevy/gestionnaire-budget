@@ -4,6 +4,10 @@ Auteurs
 
     Justine BASSELIN
     Charlotte DEVY
+    
+Execute
+
+     Suivez les indications données dans le fichier INSTALL.txt
 
 ## Présentation du projet  
 
